@@ -1,7 +1,7 @@
-# Github for 4353 Group Project for Group 12
+# COSC 4353 Group Project - Group 12
 
 ## Group Members:
-Josh Eddie 
-Kayla Trishlyn Goldsmith
-Oscar Morales 
+Josh Eddie \
+Kayla Trishlyn Goldsmith \
+Oscar Morales \
 Timothy D Trevathan
