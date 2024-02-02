@@ -10,8 +10,4 @@ VS Extensions
 - HTML CSS Support
 - MongoDB for VS Code
 - Springboot Extension Pack
-- Spring Boot Tools
-- Spring Boot Dashboard
-- Test Runner for Java
 - Extension Pack for Java
-- Debugger for Java
