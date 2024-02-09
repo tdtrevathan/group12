@@ -21,4 +21,5 @@ public class testClass {
     private Double price;
     private Number quantity;
     private Date date;
+    private Integer intid;
 }

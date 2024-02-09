@@ -1,10 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  //can delete later but I need it for reference
+  const [salesData, setSalesData] = useState([]);
+
+  useEffect( () => {
+    fetch('/api/v1/sales')
+      .then(response => response.json())
+      .then(data => {
+        setSalesData((salesData) => data);
+        console.log(data)
+        console.log(salesData)
+      })
+      .catch(e => {
+        console.log(e);
+      })
+ 
+  },[])
+  //can delete later but I need it for reference
 
   return (
     <>
@@ -28,6 +46,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      
+
+      <ul>
+        {salesData.map((sale) => (
+          <li key={sale.intid}> {sale.item} : {sale.price}</li>
+        ))}
+      </ul>
     </>
   )
 }
