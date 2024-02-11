@@ -1,7 +1,7 @@
-function Label () {
+function Label ( {name, label} ) {
     return (
         <>
-        <label for=""></label>{/* TODO */}
+        <label for={name}>{label}</label>{/* TODO classname and styling*/}
         </>
     )
 }
@@ -14,15 +14,21 @@ export function Button ( { buttonText } ) {
     )
 }
 
-export function Radio ( {label, } ) {
+export function Input ( { name, label, type } ) {
+
+    function testFunction() {
+        return {name}
+    }
+
     return (
         <>
-        {/* TODO */}
+        <Label name={testFunction()} label={label} />
+        <input id={name} name={name} type={type} />
         </>
     )
 }
 
-export function TextField ( {label, type } ) {
+export function Radio ( {label, } ) {
     return (
         <>
         {/* TODO */}

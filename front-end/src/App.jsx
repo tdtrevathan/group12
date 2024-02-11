@@ -1,60 +1,19 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0);
+import Login from "./components/Login";
+import Registration from './components/Registration'
+import FuelQuote from "./components/FuelQuote";
 
-  //can delete later but I need it for reference
-  const [salesData, setSalesData] = useState([]);
-
-  useEffect( () => {
-    fetch('/api/v1/sales')
-      .then(response => response.json())
-      .then(data => {
-        setSalesData((salesData) => data);
-        console.log(data)
-        console.log(salesData)
-      })
-      .catch(e => {
-        console.log(e);
-      })
- 
-  },[])
-  //can delete later but I need it for reference
+export default function App() {
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      
-
-      <ul>
-        {salesData.map((sale) => (
-          <li key={sale.intid}> {sale.item} : {sale.price}</li>
-        ))}
-      </ul>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index path="/" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/fuelqoute" element={<FuelQuote />} />
+      </Routes>
+    </BrowserRouter>
   )
-}
 
-export default App
+}
