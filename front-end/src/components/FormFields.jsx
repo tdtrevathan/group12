@@ -9,21 +9,31 @@ function Label ( {name, label} ) {
 export function Button ( { buttonText } ) {
     return (
         <>
-        {/* TODO */}
+        <button>{buttonText}</button> {/* TODO  Is this the button we want? or input*/}
         </>
     )
 }
 
 export function Input ( { name, label, type } ) {
 
-    function testFunction() {
-        return {name}
-    }
-
     return (
         <>
-        <Label name={testFunction()} label={label} />
+        <Label name={name} label={label} />
         <input id={name} name={name} type={type} />
+        </>
+    )
+}
+
+export function Select ( {label, name, codes} ){
+    
+    var MakeItem = function(param) {
+        return <option>{param}</option>;
+    }
+    
+    return ( 
+        <>
+            <Label name={name} label={label} />
+            <select>{codes.map(MakeItem)}</select> 
         </>
     )
 }
