@@ -38,10 +38,11 @@ export function Select ( {label, name, codes} ){
     )
 }
 
-export function Radio ( {label, } ) {
+export function Radio ( {label, name, value} ) {
     return (
         <>
-        {/* TODO */}
+        <input value={value} name={name} type='radio'></input>
+        <Label label={label}></Label>
         </>
     )
 }
