@@ -15,7 +15,7 @@ export default function App() {
           <Route index path="/" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/fuelqoute" element={<FuelQuote />} />
+          <Route path="/fuelquote" element={<FuelQuote />} />
         </Route>
       </Routes>
     </BrowserRouter>
