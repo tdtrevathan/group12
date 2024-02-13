@@ -33,7 +33,7 @@ export function Select ( {label, name, codes} ){
     return ( 
         <>
             <Label name={name} label={label} />
-            <select>{codes.map(MakeItem)}</select> 
+            <select id={name} name={name}>{codes.map(MakeItem)}</select> 
         </>
     )
 }
