@@ -6,6 +6,8 @@ export default function FuelQuote () {
     const retrievedRate = 3.55
     const calculatedTotal = 100
 
+
+
     return (
         <>
         <form>
@@ -16,9 +18,11 @@ export default function FuelQuote () {
 
         <Input name='date' label='Delivery Date:' type='date'></Input>
 
-        <Label name='rate' label='Price / Gallon:'></Label>
+        <Label name='rate' label='Suggested Price / Gallon:'></Label>
         <span name='rate'>{retrievedRate}</span>
 
+        <Button name='submitButton' type='submit' buttonText='Get Quote'></Button>
+        
         <Label name='dues' label='Ammount Due:'></Label>
         <span>${calculatedTotal}</span>
         </form>

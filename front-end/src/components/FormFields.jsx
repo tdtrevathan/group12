@@ -6,10 +6,10 @@ export function Label ( {name, label} ) {
     )
 }
 
-export function Button ( { buttonText } ) {
+export function Button ( { buttonText, name, type } ) {
     return (
         <>
-        <button>{buttonText}</button> {/* TODO  Is this the button we want? or input*/}
+        <button name={name} type={type}>{buttonText}</button> {/* TODO  Is this the button we want? or input*/}
         </>
     )
 }
