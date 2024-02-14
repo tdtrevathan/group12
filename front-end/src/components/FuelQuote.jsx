@@ -1,14 +1,28 @@
-import {Button, Input, Radio, Select} from './FormFields';
+import {Button, Input, Radio, Select, Label} from './FormFields';
 
 export default function FuelQuote () {
 
+    const retrievedAddress = '333 Fake Address Avenue'
+    const retrievedRate = 3.55
+    const calculatedTotal = 100
+
     return (
         <>
+        <form>
         <Input name='gallons' label='Gallons:' type='number'></Input>
-        <p>Retrieved Address</p>
+
+        <Label name='address' label='Address:'></Label>
+        <span name='address'>{retrievedAddress}</span>
+
         <Input name='date' label='Delivery Date:' type='date'></Input>
-        <p>Suggested Price / Gallon</p>
-        <p>Total Ammount Due</p>
+
+        <Label name='rate' label='Price / Gallon:'></Label>
+        <span name='rate'>{retrievedRate}</span>
+
+        <Label name='dues' label='Ammount Due:'></Label>
+        <span>${calculatedTotal}</span>
+        </form>
+
         </>
     )
 }

@@ -1,4 +1,4 @@
-function Label ( {name, label} ) {
+export function Label ( {name, label} ) {
     return (
         <>
         <label for={name}>{label}</label>{/* TODO classname and styling*/}
@@ -32,8 +32,8 @@ export function Select ( {label, name, codes} ){
     
     return ( 
         <>
-            <Label name={name} label={label} />
-            <select id={name} name={name}>{codes.map(MakeItem)}</select> 
+        <Label name={name} label={label} />
+        <select id={name} name={name}>{codes.map(MakeItem)}</select> 
         </>
     )
 }
