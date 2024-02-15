@@ -5,6 +5,7 @@ import Registration from './components/Registration'
 import Profile from './components/Profile';
 import FuelQuote from "./components/FuelQuote";
 import Container from "./components/Container";
+import QuoteHistory from "./components/QuoteHistory"
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/fuelquote" element={<FuelQuote />} />
+          <Route path="/quotehistory" element={<QuoteHistory />} />
         </Route>
       </Routes>
     </BrowserRouter>
