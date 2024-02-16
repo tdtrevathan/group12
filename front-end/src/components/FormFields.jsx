@@ -1,3 +1,5 @@
+import '../css/form.css'
+
 export function Label ( {name, label} ) {
     return (
         <>

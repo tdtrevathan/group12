@@ -20,32 +20,3 @@
 #outlet {
     padding: 20px;
 }
-
-#outlet form label {
-    color: #FF9F06;
-    display: block;
-    font-size: 14px;
-}
-
-#outlet form input {
-    border: 2px solid #7F2714;
-    border-radius: 5px;
-    width: calc(100% - 20px);
-    padding: 5px;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-#outlet form input:focus {
-    outline: none;
-    border-color: #FF9F06;
-    color:#7F2714;
-}
-
-#outlet form #state {
-    border: 2px solid #7F2714;
-    border-radius: 5px;
-    padding: 5px;
-    width: 50px;
-    background-color: #ffffff;
-}
