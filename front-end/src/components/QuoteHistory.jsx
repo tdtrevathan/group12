@@ -1,3 +1,5 @@
+import {Table} from './Table';
+
 export default function QuoteHistory () { /* TODO Create component for table?*/
 
     const previousQuotes = [
@@ -24,32 +26,18 @@ export default function QuoteHistory () { /* TODO Create component for table?*/
         },
     ]
 
+    const headers = [
+        'Gallons',
+        'Address',
+        'Date',
+        'Rate',
+        'Total'
+    ]
+
     return (
         <>
-        <table style={{color: "white"}}>
-            <thead>
-                <tr>
-                    <th>Gallons</th>
-                    <th>Address</th>
-                    <th>Date</th>
-                    <th>Rate</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-            {
-                previousQuotes.map((item,i)=>{
-                    return <tr key={i}>
-                        <td>{item.gallons}</td>
-                        <td>{item.address}</td>
-                        <td>{item.date}</td>
-                        <td>{item.retrievedRate}</td>
-                        <td>{item.calculatedTotal}</td>
-                    </tr>
-                })
-            }
-            </tbody>
-        </table>
+        <p>Test</p>
+            <Table headers={headers} rows={previousQuotes}></Table>
         </>
     )
 }
