@@ -3,7 +3,7 @@ import '../css/form.css'
 export function Label ( {name, label} ) {
     return (
         <>
-        <label for={name}>{label}</label>{/* TODO classname and styling*/}
+        <label for={name}>{label}</label>
         </>
     )
 }
@@ -11,17 +11,17 @@ export function Label ( {name, label} ) {
 export function Button ( { buttonText, name, type } ) {
     return (
         <>
-        <button name={name} type={type}>{buttonText}</button> {/* TODO  Is this the button we want? or input*/}
+        <button name={name} type={type}>{buttonText}</button>
         </>
     )
 }
 
-export function Input ( { name, label, type } ) {
+export function Input ( { name, label, type, handleChange } ) {
 
     return (
         <>
         <Label name={name} label={label} />
-        <input id={name} name={name} type={type} />
+        <input id={name} name={name} type={type} onChange={handleChange} />
         </>
     )
 }

@@ -7,12 +7,13 @@ form label {
     color: #FF9F06;
     display: block;
     font-size: 14px;
+    width: 50%;
 }
 
 form input {
     border: 2px solid #7F2714;
     border-radius: 5px;
-    width: calc(100% - 20px);
+    width: 75%;
     padding: 5px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -54,4 +55,12 @@ form button {
 
 form button:hover {
     background-color: #FF9F06;
+}
+
+.error {
+    display: inline;
+    color: white;
+    width: 50%;
+    padding: 2%;
+    font-size: small;
 }

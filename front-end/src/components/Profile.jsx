@@ -11,6 +11,7 @@ export default function Profile () {
             <Input name='address' label='Address 2:' type='text'></Input>
             <Input name='city' label='City:' type='text'></Input>
             <Select name='state' label='State:' codes={states}></Select>
+            <Input name='zipcode' label='Zipcode:' type='text'></Input>
         </form>
         </>
     )
