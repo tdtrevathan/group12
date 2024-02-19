@@ -1,3 +1,5 @@
+import {Button, Input, Radio, Select} from './FormFields';
+
 export default function Registration () {
     return (
         <>

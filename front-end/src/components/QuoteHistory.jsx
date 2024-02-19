@@ -36,8 +36,7 @@ export default function QuoteHistory () { /* TODO Create component for table?*/
 
     return (
         <>
-        <p>Test</p>
-            <Table headers={headers} rows={previousQuotes}></Table>
+        <Table headers={headers} rows={previousQuotes}></Table>
         </>
     )
 }
