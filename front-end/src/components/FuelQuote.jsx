@@ -1,6 +1,5 @@
 import {Button, Input, Radio, Select, Label} from './FormFields';
 import React, { useState } from 'react'
-
 export default function FuelQuote () {
 
     const retrievedAddress = '333 Fake Address Avenue'
@@ -17,7 +16,6 @@ export default function FuelQuote () {
     })
 
     const handleChange = (e) => {
-        console.log(e);
         const {name, value} = e.target
 
         setFormData({
@@ -27,10 +25,7 @@ export default function FuelQuote () {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e)
         const validationErrors = {}
-
-        console.log(formData)
 
         if(!formData.gallons){
             validationErrors.gallons = 'required'
