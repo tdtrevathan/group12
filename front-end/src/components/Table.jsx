@@ -1,10 +1,10 @@
-import '../css/form.css'
+import '../css/table.css'
 
 export function Table ({headers, rows}){
     console.log(headers);
     return (
         <>
-        <table style={{color: "black"}}>
+        <table>
             <thead>
                 <tr>
                     { headers.map((item)=><th>{item}</th>) }
