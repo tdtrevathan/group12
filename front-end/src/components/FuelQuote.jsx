@@ -62,15 +62,15 @@ export default function FuelQuote () {
         <>
         <form onSubmit={handleSubmit}>
 
-        <Input name='gallons' label='Gallons:' type='number' className={errorClass.gallons} handleChange={handleChange}></Input>
-        <span class='error'>{errors.gallons}</span>
+        <Input name='gallons' label='Gallons: *' type='number' className={errorClass.gallons} handleChange={handleChange}></Input>
+        {errors.gallons && <span class='error'>{errors.gallons}</span>}
 
         <Label name='address' label='Address:'></Label>
 
         <span className="filledData" name='address'>{retrievedAddress}</span>
 
-        <Input name='date' label='Delivery Date:' type='date' className={errorClass.date} handleChange={handleChange}></Input>
-        <span class='error'>{errors.date}</span>
+        <Input name='date' label='Delivery Date: *' type='date' className={errorClass.date} handleChange={handleChange}></Input>
+        {errors.gallons && <span class='error'>{errors.gallons}</span>}
 
         <Label name='rate' label='Suggested Price / Gallon:'></Label>
         <span className="filledData" name='rate'>{retrievedRate}</span>

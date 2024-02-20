@@ -7,7 +7,6 @@ form label {
     color: #FF9F06;
     display: block;
     font-size: 14px;
-    width: 50%;
 }
 
 form input {
@@ -16,18 +15,14 @@ form input {
     width: calc(100% - 10px);
     padding: 5px;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .filledData {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 18px;
     font-weight: 700;
-}
-
-#gallons, #date {
-    margin-bottom: 0;
 }
 
 form input:focus {
@@ -36,16 +31,30 @@ form input:focus {
     color:#7F2714;
 }
 
-form input.error {
-    border-color: #ff0000;
-}
-
-form #state {
+form select {
     border: 2px solid #7F2714;
     border-radius: 5px;
     padding: 5px;
-    width: 50px;
+    margin-bottom: 20px;
+    font-size: 18px;
     background-color: #ffffff;
+}
+
+form input.error,
+form select.error {
+    border-color: hsl(0, 100%, 50%);
+    margin-bottom: 0;
+}
+
+form #state {
+    width: 60px;
+}
+
+#cityStateGrid {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    align-items: start;
+    gap: 20px;
 }
 
 span.error {
