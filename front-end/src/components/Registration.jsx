@@ -86,13 +86,13 @@ export default function Registration () {
         <form>
             <Input name="firstName" label="First Name:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.firstName}</p>
-            <Input name="lastName" label="Last Name:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
+            <Input name="lastName" label="Last Name:" type="text" value={formInput.lastName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.lastName}</p>
-            <Input name="username" label="Username:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
+            <Input name="username" label="Username:" type="text" value={formInput.username} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.username}</p>
-            <Input name="password" label="Password:" type="password" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
+            <Input name="password" label="Password:" type="password" value={formInput.password} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.password}</p>
-            <Input name="checkPassword" label="Confirm Password: " type="password" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
+            <Input name="checkPassword" label="Confirm Password: " type="password" value={formInput.checkPassword} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.checkPassword}</p>
             <p className="success-message">{formInput.successMsg}</p>
             <Input type="submit" value="Submit"></Input>
