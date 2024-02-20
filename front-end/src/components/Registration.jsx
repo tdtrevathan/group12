@@ -1,5 +1,7 @@
 import {Button, Input, Radio, Select} from './FormFields';
 
+import { useState } from "react";
+
 export default function Registration () {
     const [formInput,setFormInput]=useState({
         firstName:"",
