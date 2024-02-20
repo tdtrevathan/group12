@@ -8,14 +8,14 @@ export default function Registration () {
         password:"",
         checkPassword:"",
     })
-    const [formError,setFormError]=userState({
+    const [formError,setFormError]=useState({
         firstName:"",
         lastName:"",
         username:"",
         password:"",
         checkPassword:""
     })
-    const handleUserInput(name,value)=>{
+    const handleUserInput=(name,value)=>{
         setFormInput({
             ...formInput,
             [name]:value,
@@ -82,7 +82,6 @@ export default function Registration () {
         }));
     }
     return (
-        <>
         <form>
             <Input name="firstName" label="First Name:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.firstName}</p>
@@ -97,6 +96,5 @@ export default function Registration () {
             <p className="success-message">{formInput.successMsg}</p>
             <Input type="submit" value="Submit"></Input>
         </form>
-        </>
     )
 }
