@@ -13,16 +13,31 @@ form label {
 form input {
     border: 2px solid #7F2714;
     border-radius: 5px;
-    width: 75%;
+    width: calc(100% - 10px);
     padding: 5px;
     font-size: 18px;
     margin-bottom: 10px;
+}
+
+.filledData {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#gallons, #date {
+    margin-bottom: 0;
 }
 
 form input:focus {
     outline: none;
     border-color: #FF9F06;
     color:#7F2714;
+}
+
+form input.error {
+    border-color: #ff0000;
 }
 
 form #state {
@@ -33,8 +48,14 @@ form #state {
     background-color: #ffffff;
 }
 
-form span {
-    font-size: 18px;
+span.error {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    color: #ff0000;
+    font-size: 12px;
+    text-align: right;
+    height: 20px;
     font-weight: 700;
 }
 
@@ -55,12 +76,4 @@ form button {
 
 form button:hover {
     background-color: #FF9F06;
-}
-
-.error {
-    display: inline;
-    color: white;
-    width: 50%;
-    padding: 2%;
-    font-size: small;
 }
