@@ -26,7 +26,7 @@ export function Input ( { name, label, type, className, handleChange } ) {
     )
 }
 
-export function Select ( {label, name, codes, handleChange} ){
+export function Select ( {label, name, codes, className, handleChange} ){
     
     var MakeItem = function(param, i) {
         return <option value={param} key={param}>{param}</option>;
@@ -35,7 +35,7 @@ export function Select ( {label, name, codes, handleChange} ){
     return ( 
         <>
         <Label name={name} label={label} />
-        <select id={name} name={name} onChange={handleChange}>{codes.map(MakeItem)}</select> 
+        <select id={name} name={name} className={className} onChange={handleChange}>{codes.map(MakeItem)}</select> 
         </>
     )
 }
