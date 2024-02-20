@@ -7,20 +7,20 @@ export default function Registration () {
         username:"",
         password:"",
         checkPassword:"",
-    })
+    });
     const [formError,setFormError]=useState({
         firstName:"",
         lastName:"",
         username:"",
         password:"",
         checkPassword:""
-    })
+    });
     const handleUserInput=(name,value)=>{
         setFormInput({
             ...formInput,
             [name]:value,
         });
-    }
+    };
     const validateFormInput=(event)=>{
         event.preventDefault();
         let inputError={
@@ -80,7 +80,7 @@ export default function Registration () {
             ...prevState,
             successMsg: "Validation Success",
         }));
-    }
+    };
     return (
         <form>
             <Input name="firstName" label="First Name:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
@@ -94,7 +94,7 @@ export default function Registration () {
             <Input name="checkPassword" label="Confirm Password: " type="password" value={formInput.checkPassword} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
             <p className="error-message">{formError.checkPassword}</p>
             <p className="success-message">{formInput.successMsg}</p>
-            <Input type="submit" value="Submit"></Input>
+            <button name="submitbtn" type="submit"></button>
         </form>
-    )
-}
+    );
+};
