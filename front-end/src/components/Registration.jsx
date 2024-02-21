@@ -1,8 +1,10 @@
 import {Button, Input, Radio, Select} from './FormFields';
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Registration () {
+    const navigate=useNavigate();
     const [errors,setErrors]=useState({})
     const [errorClass, setErrorClass]=useState({})
     const [formData, setFormData] =useState({
@@ -56,6 +58,18 @@ export default function Registration () {
             validationErrors.password = 'ERROR: length exceeded'
             validationErrorClass.fullName = 'error';
         }
+        else if(formData.password.length < 10){
+            validationErrors.password = 'ERROR: Too small'
+            validationErrorClass.fullName = 'error';
+        }
+        else if(!/(?=.*[0-9])/.test(formData.password)){
+            validationErrors.password = 'ERROR: Must contain at least one number'
+            validationErrorClass.fullName = 'error';
+        }
+        else if(!/(?=.*[!@#$%^&*])/.test(formData.password)){
+            validationErrors.password = 'ERROR: Must contain at least one special character (!@#$%^&*)'
+            validationErrorClass.fullName = 'error';
+        }
         if(!formData.checkPassword){
             validationErrors.checkPassword = 'ERROR: required'
             validationErrorClass.checkPassword = 'error';
@@ -68,7 +82,7 @@ export default function Registration () {
         setErrorClass(validationErrorClass)
         
         if(Object.keys(validationErrors).length === 0){
-
+            navigate("/")
         }
     }
     return (
