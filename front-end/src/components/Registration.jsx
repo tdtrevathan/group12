@@ -56,19 +56,19 @@ export default function Registration () {
         }
         else if(formData.password.length > 50){
             validationErrors.password = 'ERROR: length exceeded'
-            validationErrorClass.fullName = 'error';
+            validationErrorClass.password = 'error';
         }
         else if(formData.password.length < 10){
             validationErrors.password = 'ERROR: Too small'
-            validationErrorClass.fullName = 'error';
+            validationErrorClass.password = 'error';
         }
         else if(!/(?=.*[0-9])/.test(formData.password)){
             validationErrors.password = 'ERROR: Must contain at least one number'
-            validationErrorClass.fullName = 'error';
+            validationErrorClass.password = 'error';
         }
         else if(!/(?=.*[!@#$%^&*])/.test(formData.password)){
             validationErrors.password = 'ERROR: Must contain at least one special character (!@#$%^&*)'
-            validationErrorClass.fullName = 'error';
+            validationErrorClass.password = 'error';
         }
         if(!formData.checkPassword){
             validationErrors.checkPassword = 'ERROR: required'
@@ -76,7 +76,7 @@ export default function Registration () {
         }
         else if(formData.checkPassword !== formData.password){
             validationErrors.checkPassword = 'ERROR: Passwords do not match'
-            validationErrorClass.fullName = 'error';
+            validationErrorClass.checkPassword = 'error';
         }
         setErrors(validationErrors)
         setErrorClass(validationErrorClass)
