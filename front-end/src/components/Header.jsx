@@ -1,12 +1,12 @@
 import Logo from './Logo'
 import Nav from './Nav'
 
-export default function Header () {
+export default function Header ( {navShow} ) {
     return (
         <header>
 
             <Logo />
-            <Nav />
+            <Nav navShow={navShow}/>
 
         </header>
     )
