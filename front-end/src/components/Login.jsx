@@ -1,38 +1,59 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import {Button, Input, Radio, Select} from './FormFields';
 
-export default function Login() {
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function Login( {setNavShow} ) {
+
+    const[profileComplete, setProfileComplete] = useState(false);
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
     const [error, setError] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
+
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({ 
+            ...formData, [name]: value 
+        });
+        
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             //Sending login credentials to backend for authentication
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+            // const response = await fetch('/api/login', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(formData)
+            // });
 
-            if (!response.ok) {
-                //Handling unsuccessful login
+            // if (!response.ok) {
+            //     //Handling unsuccessful login
+            //     throw new Error('Invalid username or password');
+            // }
+
+            if(formData.username == '' || formData.password == '') {
                 throw new Error('Invalid username or password');
             }
 
             //Redirect to profile page when successfully logged in
-            history.push('/profile');
+
+            setNavShow(true);
+
+            if(profileComplete) {
+                navigate('/fuelquote')
+            }
+            else {
+                navigate('/profile');
+            }
         } catch (error) {
             setError(error.message);
         }
@@ -40,10 +61,11 @@ export default function Login() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Input name="username" label="Username:" type="text" onChange={handleChange} />
-            <Input name="password" label="Password:" type="password" onChange={handleChange} />
-            {error && <p style={{ color: 'red' }}>{error}</p>} {"Incorrect username or password"}
+            <Input name="username" label="Username:" type="text" handleChange={handleChange} />
+            <Input name="password" label="Password:" type="password" handleChange={handleChange} />
+            {error && <span className="error">{error}</span>}
             <Button type="submit" buttonText="Login" />
+            <span className='register'>Don't have an account? <a href="/register">Register</a></span>
         </form>
     );
 }

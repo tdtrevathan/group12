@@ -16,7 +16,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Container navShow={navShow}/>}>
-          <Route index path="/" element={<Login />} />
+          <Route index path="/" element={<Login setNavShow={setShowNav}/>} />
           <Route path="/register" element={<Registration />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/fuelquote" element={<FuelQuote />} />

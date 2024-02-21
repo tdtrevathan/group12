@@ -86,3 +86,16 @@ form button {
 form button:hover {
     background-color: #FF9F06;
 }
+
+.register {
+    color:#FF9F06;
+}
+
+.register a {
+    color:#7F2714;
+}
+
+.register a:hover {
+    color:#FF9F06;
+    text-decoration: underline;
+}
