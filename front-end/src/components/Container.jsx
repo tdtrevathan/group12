@@ -3,12 +3,12 @@ import Header from './Header'
 
 import '../css/container.css'
 
-export default function Container() {
+export default function Container( {navShow} ) {
     return (
         <>
         <main id="container">
             <div id="headerContainer">
-                <Header />
+                <Header navShow={navShow}/>
             </div>
             <div id="outlet">
                 <Outlet />
