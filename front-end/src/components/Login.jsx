@@ -40,9 +40,6 @@ export default function Login( {setNavShow} ) {
             //     throw new Error('Invalid username or password');
             // }
 
-            console.log(formData.username)
-            console.log(formData.password)
-
             if(formData.username == '' || formData.password == '') {
                 throw new Error('Invalid username or password');
             }
