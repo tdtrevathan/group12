@@ -3,100 +3,87 @@ import {Button, Input, Radio, Select} from './FormFields';
 import { useState } from "react";
 
 export default function Registration () {
-    const [formInput,setFormInput]=useState({
+    const [errors,setErrors]=useState({})
+    const [errorClass, setErrorClass]=useState({})
+    const [formData, setFormData] =useState({
         firstName:"",
         lastName:"",
         username:"",
         password:"",
         checkPassword:"",
-    });
-    const [formError,setFormError]=useState({
-        firstName:"",
-        lastName:"",
-        username:"",
-        password:"",
-        checkPassword:""
-    });
-    const handleUserInput=(name,value)=>{
-        setFormInput({
-            ...formInput,
-            [name]:value,
-        });
-    };
-    const validateFormInput=(event)=>{
-        event.preventDefault();
-        let inputError={
-            firstName:"",
-            lastName:"",
-            username:"",
-            password:"",
-            checkPassword:""
-        };
-        if(!formInput.firstName && !formInput.lastName && !formInput.username && !formInput.password){
-            setFormError({
-                ...inputError,
-                firstName:"Please enter your first name",
-                lastName:"Please enter your last name",
-                username:"Please enter a username",
-                password:"Please enter a password"
-            });
-            return;
+    })
+    const handleChange = (e)=>{
+        const {name,value} = e.target
+        errors[name]="",
+        errorClass[name]="",
+        setFormData({
+            ...formData, [name] : value
+        })
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        const validationErrors = {}
+        const validationErrorClass = {}
+        if(!formData.firstName){
+            validationErrors.firstName = 'ERROR: required'
+            validationErrorClass.firstName = 'error';
         }
-        if(!formInput.firstName){
-            setFormError({
-                ...inputError,
-                firstName:"Please enter your first name"
-            });
-            return;
+        else if(formData.firstName.length > 15){
+            validationErrors.fullName = 'ERROR: length exceeded'
+            validationErrorClass.fullName = 'error'; 
         }
-        if(!formInput.lastName){
-            setFormError({
-                ...inputError,
-                firstName:"Please enter your last name"
-            });
-            return;
+        if(!formData.lastName){
+            validationErrors.lastName = 'ERROR: required'
+            validationErrorClass.lastName = 'error';
         }
-        if(!formInput.username){
-            setFormError({
-                ...inputError,
-                firstName:"Please enter your username"
-            });
-            return;
+        else if(formData.lastName.length > 35){
+            validationErrors.lastName = 'ERROR: length exceeded'
+            validationErrorClass.lastName = 'error';
         }
-        if(!formInput.password){
-            setFormError({
-                ...inputError,
-                firstName:"Please enter your password"
-            });
-            return;
+        if(!formData.username){
+            validationErrors.username = 'ERROR: required'
+            validationErrorClass.username = 'error';
         }
-        if(formInput.checkPassword !== formInput.password){
-            setFormError({
-                ...inputError,
-                checkPassword:"Passwords do not match"
-            });
-            return;
+        else if(formData.username.length > 50){
+            validationErrors.username = 'ERROR: length exceeded'
+            validationErrorClass.username = 'error';
         }
-        setFormError(inputError);
-        setFormInput((prevState) =>({
-            ...prevState,
-            successMsg: "Validation Success",
-        }));
-    };
+        if(!formData.password){
+            validationErrors.password = 'ERROR: required'
+            validationErrorClass.password = 'error';
+        }
+        else if(formData.password.length > 50){
+            validationErrors.password = 'ERROR: length exceeded'
+            validationErrorClass.fullName = 'error';
+        }
+        if(!formData.checkPassword){
+            validationErrors.checkPassword = 'ERROR: required'
+            validationErrorClass.checkPassword = 'error';
+        }
+        else if(formData.checkPassword !== formData.password){
+            validationErrors.checkPassword = 'ERROR: Passwords do not match'
+            validationErrorClass.fullName = 'error';
+        }
+        setErrors(validationErrors)
+        setErrorClass(validationErrorClass)
+        
+        if(Object.keys(validationErrors).length === 0){
+
+        }
+    }
     return (
-        <form>
-            <Input name="firstName" label="First Name:" type="text" value={formInput.firstName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
-            <p className="error-message">{formError.firstName}</p>
-            <Input name="lastName" label="Last Name:" type="text" value={formInput.lastName} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
-            <p className="error-message">{formError.lastName}</p>
-            <Input name="username" label="Username:" type="text" value={formInput.username} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
-            <p className="error-message">{formError.username}</p>
-            <Input name="password" label="Password:" type="password" value={formInput.password} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
-            <p className="error-message">{formError.password}</p>
-            <Input name="checkPassword" label="Confirm Password: " type="password" value={formInput.checkPassword} onChange={({target})=>{handleUserInput(target.name,target.value)}}></Input>
-            <p className="error-message">{formError.checkPassword}</p>
-            <p className="success-message">{formInput.successMsg}</p>
-            <button name="submitbtn" type="submit"></button>
+        <form onSubmit={handleSubmit}>
+            <Input name='firstName' label='First Name: *' type='text' className={errorClass.firstName} handleChange={handleChange}></Input>
+            {errors.firstName && <span class='error'>{errors.firstName}</span>}
+            <Input name='lastName' label='Last Name: *' type='text' className={errorClass.lastName} handleChange={handleChange}></Input>
+            {errors.lastName && <span class='error'>{errors.lastName}</span>}
+            <Input name='username' label='Username: *' type='text' className={errorClass.username} handleChange={handleChange}></Input>
+            {errors.username && <span class='error'>{errors.username}</span>}
+            <Input name='password' label='Password: *' type='text' className={errorClass.password} handleChange={handleChange}></Input>
+            {errors.password && <span class='error'>{errors.password}</span>}
+            <Input name='checkPassword' label='Re-enter Password: *' type='text' className={errorClass.checkPassword} handleChange={handleChange}></Input>
+            {errors.checkPassword && <span class='error'>{errors.checkPassword}</span>}
+            <Button name='submitButton' type='submit' buttonText='Register'></Button>
         </form>
     );
 };
