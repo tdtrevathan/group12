@@ -1,6 +1,10 @@
 import {Button, Input, Radio, Select, Label} from './FormFields';
-import React, { useState } from 'react'
-export default function FuelQuote () {
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+
+export default function FuelQuote ( {loggedIn} ) {
+    
+  const navigate = useNavigate();
 
     const retrievedAddress = '333 Fake Address Avenue'
     const retrievedRate = 3.55
@@ -57,6 +61,12 @@ export default function FuelQuote () {
           setShowTotal(true);
         }
     }
+
+    useEffect(() => {
+        if(!loggedIn) {
+            navigate('/')
+        }
+      }, []);
 
     return (
         <>

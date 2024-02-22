@@ -3,7 +3,7 @@ import '../css/form.css'
 export function Label ( {name, label} ) {
     return (
         <>
-        <label for={name}>{label}</label>
+        <label htmlFor={name}>{label}</label>
         </>
     )
 }

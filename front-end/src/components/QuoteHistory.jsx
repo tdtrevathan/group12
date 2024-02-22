@@ -1,6 +1,10 @@
 import {Table} from './Table';
+import React, { useEffect } from 'react'
+import { Navigate, useNavigate } from "react-router-dom";
 
-export default function QuoteHistory () { /* TODO Create component for table?*/
+export default function QuoteHistory ( {loggedIn} ) {
+    
+    const navigate = useNavigate();
 
     const previousQuotes = [
         {
@@ -33,6 +37,12 @@ export default function QuoteHistory () { /* TODO Create component for table?*/
         'Rate',
         'Total'
     ]
+
+    useEffect(() => {
+        if(!loggedIn) {
+            navigate('/')
+        }
+      }, []);
 
     return (
         <>

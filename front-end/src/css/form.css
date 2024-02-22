@@ -88,6 +88,7 @@ form button:hover {
 }
 
 .register {
+    margin-top: 5px;
     color:#FF9F06;
 }
 
@@ -98,4 +99,33 @@ form button:hover {
 .register a:hover {
     color:#FF9F06;
     text-decoration: underline;
+}
+
+#register #password,
+#register #checkPassword {
+    margin-bottom: 5px;
+}
+
+#passwordRequirements {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#passwordRequirements p {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0;
+    color: #ff0000;
+}
+
+#passwordRequirements p::before {
+    content: 'x ';
+}
+
+#passwordRequirements p.valid {
+    color: #037e2c;
+}
+
+#passwordRequirements p.valid::before {
+    content: '\2713 ';
 }
