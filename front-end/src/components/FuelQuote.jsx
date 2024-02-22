@@ -1,6 +1,10 @@
 import {Button, Input, Radio, Select, Label} from './FormFields';
-import React, { useState } from 'react'
-export default function FuelQuote () {
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+
+export default function FuelQuote ( {loggedIn} ) {
+    
+  const navigate = useNavigate();
 
     const retrievedAddress = '333 Fake Address Avenue'
     const retrievedRate = 3.55
@@ -58,6 +62,12 @@ export default function FuelQuote () {
         }
     }
 
+    useEffect(() => {
+        if(!loggedIn) {
+            navigate('/')
+        }
+      }, []);
+
     return (
         <>
         <form onSubmit={handleSubmit}>
@@ -70,7 +80,7 @@ export default function FuelQuote () {
         <span className="filledData" name='address'>{retrievedAddress}</span>
 
         <Input name='date' label='Delivery Date: *' type='date' className={errorClass.date} handleChange={handleChange}></Input>
-        {errors.gallons && <span class='error'>{errors.gallons}</span>}
+        {errors.date && <span class='error'>{errors.date}</span>}
 
         <Label name='rate' label='Suggested Price / Gallon:'></Label>
         <span className="filledData" name='rate'>{retrievedRate}</span>

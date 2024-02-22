@@ -1,16 +1,16 @@
 import '../css/nav.css'
 
-export default function Nav ( {navShow} ) {
+import { Link } from "react-router-dom";
+
+export default function Nav ( {loggedIn} ) {
     return (
         <nav id="mainNav">
 
-            {navShow ?
+            {loggedIn ?
                 <>
-                <a href="/">Login</a>
-                <a href="/register">Register</a>
-                <a href="/profile">Profile</a>
-                <a href="/fuelquote">Fuel Quote</a>
-                <a href="/quotehistory">Quote History</a>
+                <Link to="/profile">Profile</Link>
+                <Link to="/fuelquote">Fuel Quote</Link>
+                <Link to="/quotehistory">Quote History</Link>
                 </>
                 :
                 ''

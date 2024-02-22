@@ -3,7 +3,7 @@ import {Button, Input, Radio, Select} from './FormFields';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login( {setNavShow} ) {
+export default function Login( {setLoggedIn} ) {
 
     const[profileComplete, setProfileComplete] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Login( {setNavShow} ) {
 
             //Redirect to profile page when successfully logged in
 
-            setNavShow(true);
+            setLoggedIn(true);
 
             if(profileComplete) {
                 navigate('/fuelquote')
@@ -65,7 +65,7 @@ export default function Login( {setNavShow} ) {
             <Input name="password" label="Password:" type="password" handleChange={handleChange} />
             {error && <span className="error">{error}</span>}
             <Button type="submit" buttonText="Login" />
-            <span className='register'>Don't have an account? <a href="/register">Register</a></span>
+            <div className='register'>Don't have an account? <a href="/register">Register</a></div>
         </form>
     );
 }
