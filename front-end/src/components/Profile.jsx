@@ -105,7 +105,9 @@ export default function Profile ( {loggedIn} ) {
                      body: JSON.stringify(formData)
                  });
                  
+                 //To show that post works
                  console.log(response)
+                 
                  if (!response.ok) {
                      //Handling unsuccessful creation
                      throw new Error('Did not create profile');
@@ -130,6 +132,9 @@ export default function Profile ( {loggedIn} ) {
                 },
             }).then(response => response.json())
             .then(data => {
+
+                setFormData((formData) => data)
+                
               let fullName = document.getElementsByName('fullName');
               let address1 = document.getElementsByName('address1');
               let address2 = document.getElementsByName('address2');

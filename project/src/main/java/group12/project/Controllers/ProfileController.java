@@ -52,9 +52,9 @@ public class ProfileController {
     }
     
     @PutMapping("{id}")
-    public String editProfile(@PathVariable String id, @RequestBody String entity) {
+    public void editProfile(@PathVariable String id, @RequestBody String entity) {
         //TODO: process PUT request
         
-        return entity;
+        
     }
 }
