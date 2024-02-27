@@ -1,6 +1,10 @@
-package group12.project;
+package group12.project.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import group12.project.TestService;
+import group12.project.Views.testClass;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;

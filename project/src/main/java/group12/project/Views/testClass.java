@@ -1,4 +1,4 @@
-package group12.project;
+package group12.project.Views;
 
 import java.util.Date;
 import org.bson.types.ObjectId;

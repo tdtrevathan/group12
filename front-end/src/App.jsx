@@ -18,7 +18,7 @@ export default function App() {
         <Route path="" element={<Container loggedIn={loggedIn}/>}>
           <Route index path="/" element={<Login setLoggedIn={setLoggedIn}/>} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/profile" element={<Profile loggedIn={loggedIn}/>} />
+          <Route path="/profile/:id" element={<Profile loggedIn={loggedIn}/>} />
           <Route path="/fuelquote" element={<FuelQuote loggedIn={loggedIn}/>} />
           <Route path="/quotehistory" element={<QuoteHistory loggedIn={loggedIn}/>} />
         </Route>

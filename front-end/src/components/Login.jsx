@@ -52,7 +52,10 @@ export default function Login( {setLoggedIn} ) {
                 navigate('/fuelquote')
             }
             else {
-                navigate('/profile');
+                const id = 1
+
+                navigate(`/profile/${id}`);
+                //navigate('/profile');
             }
         } catch (error) {
             setError(error.message);

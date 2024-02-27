@@ -1,11 +1,13 @@
-package group12.project;
+package group12.project.Models;
 
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import group12.project.Views.testClass;
+
 @Repository
-public interface TestRepo extends MongoRepository<testClass, ObjectId> {
+public interface testModel extends MongoRepository<testClass, ObjectId> {
     
 }

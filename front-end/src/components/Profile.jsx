@@ -1,9 +1,12 @@
 import {Button, Input, Radio, Select} from './FormFields';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router';
+
 export default function Profile ( {loggedIn} ) {
     
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const states = ['', 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
@@ -29,7 +32,7 @@ export default function Profile ( {loggedIn} ) {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const validationErrors = {}
@@ -91,9 +94,27 @@ export default function Profile ( {loggedIn} ) {
 
         setErrors(validationErrors)
         setErrorClass(validationErrorClass)
-        
-        if(Object.keys(validationErrors).length === 0){
 
+        if(Object.keys(validationErrors).length === 0){
+            try {
+                 const response = await fetch('/api/profile', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify(formData)
+                 });
+                 
+                 console.log(response)
+                 if (!response.ok) {
+                     //Handling unsuccessful creation
+                     throw new Error('Did not create profile');
+                 }
+                 
+
+            } catch (error) {
+                //setError(error.message);
+            }
         }
     }
 
@@ -101,6 +122,33 @@ export default function Profile ( {loggedIn} ) {
         if(!loggedIn) {
             navigate('/')
         }
+        async function getProfile(){
+            return await fetch(`/api/profile/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(response => response.json())
+            .then(data => {
+              let fullName = document.getElementsByName('fullName');
+              let address1 = document.getElementsByName('address1');
+              let address2 = document.getElementsByName('address2');
+              let city = document.getElementsByName('city');
+              let state = document.getElementsByName('state');
+              let zipcode = document.getElementsByName('zipcode');
+
+              fullName[0].value = data.fullName;
+              address1[0].value = data.address1;
+              address2[0].value = data.address2;
+              city[0].value = data.city;
+              state[0].value = data.state;
+              zipcode[0].value = data.zipcode;
+            })
+            .catch(e => {
+              console.log(e);
+            })
+        }
+        getProfile();
       }, []);
 
     return (
@@ -108,9 +156,12 @@ export default function Profile ( {loggedIn} ) {
         <form onSubmit={handleSubmit}>
             <Input name='fullName' label='Full Name: *' type='text' className={errorClass.fullName} handleChange={handleChange}></Input>
             {errors.fullName && <span class='error'>{errors.fullName}</span>}
+            
             <Input name='address1' label='Address 1: *' type='text' className={errorClass.address1} handleChange={handleChange}></Input>
             {errors.address1 && <span class='error'>{errors.address1}</span>}
+            
             <Input name='address2' label='Address 2:' type='text' className={errorClass.address2} handleChange={handleChange}></Input>
+            
             {errors.address2 && <span class='error'>{errors.address2}</span>}
             <div id="cityStateGrid">
                 <div id="cityContainer">
@@ -122,6 +173,7 @@ export default function Profile ( {loggedIn} ) {
                     {errors.state && <span class='error'>{errors.state}</span>}
                 </div>
             </div>
+            
             <Input name='zipcode' label='Zipcode: *' type='text' className={errorClass.zipcode} handleChange={handleChange}></Input>
             {errors.zipcode && <span class='error'>{errors.zipcode}</span>}
 
