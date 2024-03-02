@@ -1,4 +1,0 @@
-MONGO_DATABASE = "mongodbVSCodePlaygroundDB"
-MONGO_USER = "extraUser"
-MONGO_PASSWORD = "C6GCVsRqU0iKvQ45"
-MONGO_CLUSTER = "cluster0"

@@ -14,13 +14,16 @@ class ProfileControllerTests {
 	ProfileController controller = new ProfileController();
 
 	@Test
-	public void contextLoads() {
-	}
-
-	@Test
-	public void fakeTest(){
+	public void getProfileViewWithIdOf1_ShouldReturnDummyData(){
 		var result = controller.get("1");
+
+		assertEquals("1", result.getBody().getId());
 		assertEquals("Timothy", result.getBody().getFullName());
+		assertEquals("My Address", result.getBody().getAddress1());
+		assertEquals("", result.getBody().getAddress2());
+		assertEquals("Houston", result.getBody().getCity());
+		assertEquals("TX", result.getBody().getState());
+		assertEquals("77336", result.getBody().getZipcode());
 	}
 
 }
