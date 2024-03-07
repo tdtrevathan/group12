@@ -25,5 +25,4 @@ class ProfileControllerTests {
 		assertEquals("TX", result.getBody().getState());
 		assertEquals("77336", result.getBody().getZipcode());
 	}
-
 }

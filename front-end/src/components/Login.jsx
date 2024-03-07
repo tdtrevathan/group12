@@ -52,7 +52,7 @@ export default function Login( {setLoggedIn} ) {
                 navigate('/fuelquote')
             }
             else {
-                const id = 1
+                const id = "65e9eca2a9308d1be0c7c94c"
 
                 navigate(`/profile/${id}`);
                 //navigate('/profile');
