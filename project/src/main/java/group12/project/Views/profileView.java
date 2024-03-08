@@ -17,7 +17,8 @@ import org.springframework.data.annotation.*;
 //@NoArgsConstructor
 public class profileView {
     //@Id
-
+    public profileView(){}
+    
     public profileView(
     String id,
     String fullName,

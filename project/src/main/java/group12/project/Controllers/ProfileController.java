@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import group12.project.ProfileRepo;
 import group12.project.Views.profileView;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,29 +26,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/api/profile")
 public class ProfileController {
     
-    //@Autowired
+    @Autowired
     //for when we connect database
-    //private TestService testService;
+    private ProfileRepo profileRepo;
 
     @GetMapping("{id}")
     public ResponseEntity<profileView> get(@PathVariable String id) {
 
         //get profile based on id from db
-        profileView profile = new profileView(
-            id,
-            "Timothy",
-            "My Address",
-            "",
-            "Houston", 
-            "TX", 
-            "77336");
-
+        //profileView profile = new profileView(
+        //    id,
+        //    "Timothy",
+        //    "My Address",
+        //    "",
+        //    "Houston", 
+        //    "TX", 
+        //    "77336");
+        var profile = profileRepo.get(id);
         return new ResponseEntity<profileView>(profile, HttpStatus.OK);
     }
 
     @PostMapping
     public void createProfile(@RequestBody profileView entity) {
 
+        profileRepo.create(entity);
         //send entity to db
     }
     
