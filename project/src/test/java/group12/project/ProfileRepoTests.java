@@ -47,4 +47,23 @@ class ProfileRepoTests {
 
 		assertEquals(profile, result);
 	}
+
+	@Test
+	public void createProfile_ShouldCreateProfile(){
+
+		profileView profile = new profileView(
+            "1",
+            "Timothy",
+            "My Address",
+            "",
+            "Houston", 
+            "TX", 
+            "77336");
+
+		Mockito.when(repo.insert(profile))
+			.thenReturn(profile);
+		
+		var result = profileRepo.create(profile);
+		assertEquals(profile, result);
+	}
 }

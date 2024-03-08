@@ -19,11 +19,7 @@ public class ProfileRepo {
         return result.get();
     }
 
-    public void create(profileView profile){
-        repo.insert(profile);
-    }
-
-    public void delete(String id){
-        repo.deleteById(id);
+    public profileView create(profileView profile){
+        return repo.insert(profile);
     }
 }
