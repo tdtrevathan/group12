@@ -1,12 +1,12 @@
 import Logo from './Logo'
 import Nav from './Nav'
 
-export default function Header ( {loggedIn} ) {
+export default function Header ( {loggedInID} ) {
     return (
         <header>
 
             <Logo />
-            <Nav loggedIn={loggedIn}/>
+            <Nav loggedInID={loggedInID}/>
 
         </header>
     )

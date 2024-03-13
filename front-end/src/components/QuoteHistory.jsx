@@ -1,8 +1,8 @@
-import {Table} from './Table';
-import React, { useEffect } from 'react'
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Table } from './Table';
 
-export default function QuoteHistory ( {loggedIn} ) {
+export default function QuoteHistory ( {loggedInID} ) {
     
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export default function QuoteHistory ( {loggedIn} ) {
     ]
 
     useEffect(() => {
-        if(!loggedIn) {
+        if(!loggedInID) {
             navigate('/')
         }
       }, []);

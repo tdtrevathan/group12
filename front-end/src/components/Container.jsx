@@ -3,12 +3,12 @@ import Header from './Header'
 
 import '../css/container.css'
 
-export default function Container( {loggedIn} ) {
+export default function Container( {loggedInID} ) {
     return (
         <>
         <main id="container">
             <div id="headerContainer">
-                <Header loggedIn={loggedIn}/>
+                <Header loggedInID={loggedInID}/>
             </div>
             <div id="outlet">
                 <Outlet />
