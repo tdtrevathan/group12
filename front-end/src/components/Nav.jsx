@@ -1,12 +1,12 @@
-import '../css/nav.css'
+import '../css/nav.css';
 
 import { Link } from "react-router-dom";
 
-export default function Nav ( {loggedIn} ) {
+export default function Nav ( {loggedInID} ) {
     return (
         <nav id="mainNav">
 
-            {loggedIn ?
+            {loggedInID ?
                 <>
                 <Link to="/profile">Profile</Link>
                 <Link to="/fuelquote">Fuel Quote</Link>

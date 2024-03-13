@@ -1,12 +1,11 @@
-import {Button, Input, Radio, Select} from './FormFields';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router';
+import { Button, Input, Select } from './FormFields';
 
-export default function Profile ( {loggedIn} ) {
+export default function Profile ( {loggedInID} ) {
     
     const navigate = useNavigate();
-    const { id } = useParams();
+    const id = loggedInID;
 
     const states = ['', 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
@@ -120,40 +119,46 @@ export default function Profile ( {loggedIn} ) {
         }
     }
 
+    async function getProfile(){
+
+        return await fetch(`/api/profile/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => response.json())
+        .then(data => {
+
+            setFormData((formData) => data)
+            
+          let fullName = document.getElementsByName('fullName');
+          let address1 = document.getElementsByName('address1');
+          let address2 = document.getElementsByName('address2');
+          let city = document.getElementsByName('city');
+          let state = document.getElementsByName('state');
+          let zipcode = document.getElementsByName('zipcode');
+
+          fullName[0].value = data.fullName;
+          address1[0].value = data.address1;
+          address2[0].value = data.address2;
+          city[0].value = data.city;
+          state[0].value = data.state;
+          zipcode[0].value = data.zipcode;
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }
+
     useEffect(() => {
-        if(!loggedIn) {
+
+        if(!loggedInID) {
             navigate('/')
+            return;
         }
-        async function getProfile(){
-            return await fetch(`/api/profile/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then(response => response.json())
-            .then(data => {
 
-                setFormData((formData) => data)
-                
-              let fullName = document.getElementsByName('fullName');
-              let address1 = document.getElementsByName('address1');
-              let address2 = document.getElementsByName('address2');
-              let city = document.getElementsByName('city');
-              let state = document.getElementsByName('state');
-              let zipcode = document.getElementsByName('zipcode');
-
-              fullName[0].value = data.fullName;
-              address1[0].value = data.address1;
-              address2[0].value = data.address2;
-              city[0].value = data.city;
-              state[0].value = data.state;
-              zipcode[0].value = data.zipcode;
-            })
-            .catch(e => {
-              console.log(e);
-            })
-        }
         getProfile();
+
       }, []);
 
     return (

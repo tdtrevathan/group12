@@ -1,9 +1,9 @@
-import {Button, Input, Radio, Select} from './FormFields';
+import { Button, Input } from './FormFields';
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login( {setLoggedIn} ) {
+export default function Login( {setLoggedInID} ) {
 
     const[profileComplete, setProfileComplete] = useState(false);
 
@@ -46,16 +46,13 @@ export default function Login( {setLoggedIn} ) {
 
             //Redirect to profile page when successfully logged in
 
-            setLoggedIn(true);
-
             if(profileComplete) {
                 navigate('/fuelquote')
             }
             else {
                 const id = "65e9eca2a9308d1be0c7c94c"
-
-                navigate(`/profile/${id}`);
-                //navigate('/profile');
+                setLoggedInID(id);
+                navigate(`/profile`);
             }
         } catch (error) {
             setError(error.message);
