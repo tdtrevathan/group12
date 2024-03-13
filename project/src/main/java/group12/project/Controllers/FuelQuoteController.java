@@ -6,11 +6,6 @@ import group12.project.Views.fuelQuoteView;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +29,7 @@ public class FuelQuoteController {
     }
 
     @PostMapping
-    public String createQuote(@RequestBody String entity) {
+    public String createQuote(@RequestBody fuelQuoteView entity) {
         //TODO: process POST request
         
         return null;

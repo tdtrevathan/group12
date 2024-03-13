@@ -1,22 +1,9 @@
 package group12.project.Views;
-
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import org.springframework.data.annotation.*;
-
-//for when we connect database
-//@Document(collection = "sales")
 @Data
-//re-impliment and remove constructor when we add database
-//@AllArgsConstructor
-//@NoArgsConstructor
 public class profileView {
-    //@Id
+
     public profileView(){}
     
     public profileView(
