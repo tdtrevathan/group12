@@ -27,19 +27,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProfileController {
     
     @Autowired
-    private ProfileService profileRepo;
+    private ProfileService profileService;
 
     @GetMapping("{id}")
     public ResponseEntity<profileView> get(@PathVariable String id) {
 
-        var profile = profileRepo.get(id);
+        var profile = profileService.get(id);
         return new ResponseEntity<profileView>(profile, HttpStatus.OK);
     }
 
     @PostMapping
-    public void createProfile(@RequestBody profileView entity) {
+    public profileView createProfile(@RequestBody profileView entity) {
 
-        profileRepo.create(entity);
+        return profileService.create(entity);
     }
     
     @PutMapping("{id}")

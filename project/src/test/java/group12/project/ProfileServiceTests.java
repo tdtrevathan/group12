@@ -13,20 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import group12.project.Models.profileModel;
+import group12.project.Repos.profileRepo;
+import group12.project.Services.ProfileService;
 import group12.project.Views.profileView;
 
 import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class ProfileRepoTests {
+class ProfileServiceTests {
 
 	@InjectMocks
-	ProfileRepo profileRepo;
+	ProfileService profileService;
 
     @Mock
-    private profileModel repo;
+    private profileRepo repo;
 
 	@Test
 	public void getProfile_ShouldReturnProfile(){
@@ -43,7 +44,7 @@ class ProfileRepoTests {
 		Mockito.when(repo.findById(profile.getId()))
 			.thenReturn(Optional.of(profile));
 
-		var result = profileRepo.get(profile.getId());
+		var result = profileService.get(profile.getId());
 
 		assertEquals(profile, result);
 	}
@@ -63,7 +64,7 @@ class ProfileRepoTests {
 		Mockito.when(repo.insert(profile))
 			.thenReturn(profile);
 		
-		var result = profileRepo.create(profile);
+		var result = profileService.create(profile);
 		assertEquals(profile, result);
 	}
 }
