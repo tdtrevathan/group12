@@ -30,7 +30,7 @@ class ProfileServiceTests {
     private profileRepo repo;
 
 	@Test
-	public void getProfile_ShouldReturnProfile(){
+	public void getProfile_ShouldReturnProfile() throws Exception{
 
 		profileView profile = new profileView(
             "1",
@@ -50,9 +50,9 @@ class ProfileServiceTests {
 	}
 
 	@Test
-	public void createProfile_ShouldCreateProfile(){
+	public void createProfile_ShouldCreateProfile() throws Exception{
 
-		profileView profile = new profileView(
+		profileView profile = new profileView (
             "1",
             "Timothy",
             "My Address",

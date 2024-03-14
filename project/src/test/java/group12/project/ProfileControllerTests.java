@@ -30,7 +30,7 @@ class ProfileControllerTests {
 
 
 	@Test
-	public void getProfileViewWithIdOf1_ShouldReturnDummyData(){
+	public void getProfileViewWithIdOf1_ShouldReturnDummyData() throws Exception{
 		profileView profile = new profileView(
             "1",
             "Timothy",
@@ -53,7 +53,7 @@ class ProfileControllerTests {
 	}
 
 	@Test
-	public void createProfile_SuccesfullyCreatesProfile(){
+	public void createProfile_SuccesfullyCreatesProfile() throws Exception{ 
 		profileView profile = new profileView(
             "1",
             "Timothy",
