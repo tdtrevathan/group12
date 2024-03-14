@@ -1,4 +1,4 @@
-package group12.project;
+package group12.project.Views;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;

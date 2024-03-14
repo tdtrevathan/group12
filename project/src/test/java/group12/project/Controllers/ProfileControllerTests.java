@@ -1,37 +1,36 @@
-package group12.project;
+package group12.project.Controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import group12.project.Controllers.ProfileController;
 import group12.project.Repos.profileRepo;
-import group12.project.Services.ProfileService;
 import group12.project.Views.profileView;
-
-import java.util.Optional;
+import group12.project.Services.ProfileService;
 
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
-class ProfileServiceTests {
-
-	@InjectMocks
-	ProfileService profileService;
+class ProfileControllerTests {
 
     @Mock
     private profileRepo repo;
 
-	@Test
-	public void getProfile_ShouldReturnProfile() throws Exception{
+	@Mock
+	private ProfileService service;
 
+	@InjectMocks
+	ProfileController controller = new ProfileController();
+
+
+	@Test
+	public void getProfileViewWithIdOf1_ShouldReturnDummyData() throws Exception{
 		profileView profile = new profileView(
             "1",
             "Timothy",
@@ -39,32 +38,41 @@ class ProfileServiceTests {
             "",
             "Houston", 
             "TX", 
-            "77336");
+            "77336"
+		);
 
 		Mockito.when(repo.findById(profile.getId()))
-			.thenReturn(Optional.of(profile));
+		.thenReturn(Optional.of(profile));
+		
+		Mockito.when(service.get(profile.getId()))
+			.thenReturn(profile);
+		
+		var result = controller.get("1");
 
-		var result = profileService.get(profile.getId());
-
-		assertEquals(profile, result);
+		assertEquals(profile, result.getBody());
 	}
 
 	@Test
-	public void createProfile_ShouldCreateProfile() throws Exception{
-
-		profileView profile = new profileView (
+	public void createProfile_SuccesfullyCreatesProfile() throws Exception{ 
+		profileView profile = new profileView(
             "1",
             "Timothy",
             "My Address",
             "",
             "Houston", 
             "TX", 
-            "77336");
-
+            "77336"
+		);
+		
 		Mockito.when(repo.insert(profile))
 			.thenReturn(profile);
 		
-		var result = profileService.create(profile);
+		Mockito.when(service.create(profile))
+			.thenReturn(profile);
+
+		var result = controller.createProfile(profile);
+
 		assertEquals(profile, result);
+
 	}
 }
