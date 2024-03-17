@@ -96,6 +96,7 @@ export default function Profile ( {loggedInID} ) {
 
         if(Object.keys(validationErrors).length === 0){
             try {
+                console.log(formData.fullName)
                  const response = await fetch('/api/profile', {
                      method: 'POST',
                      headers: {

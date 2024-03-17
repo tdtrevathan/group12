@@ -18,10 +18,31 @@ public class ProfileService {
         if(result.get() == null) return new profileView();
         return result.get();
     }
-
-    public profileView create(profileView profile){
+    
+    //Use this as reference for inserts
+    public profileView insert(profileView profile){
         if(profile == null) return null;
-        
+
         return repo.insert(profile);
+    }
+
+    public profileView upsert(profileView profile){
+        if(profile == null) return null;
+
+
+        var result = repo.findById(profile.getId()).get();
+
+        if(result != null){
+            result.setFullName(profile.getFullName());  
+            result.setAddress1(profile.getAddress1());
+            result.setAddress2(profile.getAddress2());
+            result.setCity(profile.getCity());
+            result.setState(profile.getState());
+            result.setZipcode(profile.getZipcode());
+
+            repo.save(result);
+        }
+
+        return repo.save(profile);
     }
 }

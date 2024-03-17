@@ -39,13 +39,6 @@ public class ProfileController {
     @PostMapping
     public profileView createProfile(@RequestBody profileView entity) {
 
-        return profileService.create(entity);
-    }
-    
-    @PutMapping("{id}")
-    public void editProfile(@PathVariable String id, @RequestBody String entity) {
-        //TODO: process PUT request
-        
-        
+        return profileService.upsert(entity);
     }
 }
