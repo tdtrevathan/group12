@@ -67,7 +67,7 @@ class ProfileControllerTests {
 		Mockito.when(repo.insert(profile))
 			.thenReturn(profile);
 		
-		Mockito.when(service.create(profile))
+		Mockito.when(service.upsert(profile))
 			.thenReturn(profile);
 
 		var result = controller.createProfile(profile);
