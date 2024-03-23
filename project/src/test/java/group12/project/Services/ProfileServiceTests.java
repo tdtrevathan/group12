@@ -1,7 +1,8 @@
 package group12.project.Services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,15 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import group12.project.Repos.profileRepo;
-import group12.project.Services.ProfileService;
 import group12.project.Views.profileView;
-
-import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -64,7 +60,7 @@ class ProfileServiceTests {
 		Mockito.when(repo.insert(profile))
 			.thenReturn(profile);
 		
-		var result = profileService.create(profile);
+		var result = profileService.upsert(profile);
 		assertEquals(profile, result);
 	}
 }

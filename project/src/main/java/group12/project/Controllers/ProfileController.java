@@ -30,9 +30,19 @@ public class ProfileController {
     private ProfileService profileService;
 
     @GetMapping("{id}")
-    public ResponseEntity<profileView> get(@PathVariable String id) {
+    public ResponseEntity<profileView> get(@PathVariable String id) throws Exception {
 
-        var profile = profileService.get(id);
+        // var profile = profileService.get(id);
+        profileView profile = new profileView(
+            "1",
+            "Timothy",
+            "My Address",
+            "",
+            "Houston", 
+            "TX", 
+            "77336"
+		);
+
         return new ResponseEntity<profileView>(profile, HttpStatus.OK);
     }
 
