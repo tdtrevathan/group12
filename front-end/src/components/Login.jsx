@@ -27,18 +27,25 @@ export default function Login( {setLoggedInID} ) {
         e.preventDefault();
         try {
             //Sending login credentials to backend for authentication
-            // const response = await fetch('/api/login', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(formData)
-            // });
+            const id = await fetch('/api/login/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }).then(response => {
+                if(!response.ok) {
+                    throw new Error('Connection failed');
+                }
+                return response.json()
+            })
+            .then (data => {
+                return data.id;
+            })
 
-            // if (!response.ok) {
-            //     //Handling unsuccessful login
-            //     throw new Error('Invalid username or password');
-            // }
+            if (id == "Not found") {
+                throw new Error('Invalid username or password');
+            }
 
             if(formData.username == '' || formData.password == '') {
                 throw new Error('Invalid username or password');
@@ -46,14 +53,11 @@ export default function Login( {setLoggedInID} ) {
 
             //Redirect to profile page when successfully logged in
 
-            if(profileComplete) {
-                navigate('/fuelquote')
-            }
-            else {
-                const id = "65e9eca2a9308d1be0c7c94c"
-                setLoggedInID(id);
-                navigate(`/profile`);
-            }
+            // const id = "65e9eca2a9308d1be0c7c94c"
+            console.log("ID: " + id);
+            setLoggedInID(id);
+            navigate(`/profile`);
+
         } catch (error) {
             setError(error.message);
         }

@@ -1,37 +1,43 @@
 package group12.project.Controllers;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.HashMap;
+import java.util.Map;
 
-import group12.project.Views.loginView;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import group12.project.Services.LoginService;
+import group12.project.Views.loginView;
 
 @RestController
-@RequestMapping("/api/v1/login/")
+@RequestMapping("/api/login/")
 public class LoginController {
     
-    //@Autowired
-    //for when we connect database
-    //private TestService testService;
+    @Autowired
+    private LoginService loginService;
 
-    @GetMapping("{userId}")
-    public ResponseEntity<loginView> get(@PathVariable String userId) {
-        //TODO: process GET request
+    @PostMapping("/signin")
+    public ResponseEntity<Map<String, String>> userLogin(@RequestBody loginView entity) throws Exception {
 
-        return null;
+        String id = loginService.getId(entity.getUsername());
+        // String id = "1";
+
+        Map<String, String> body = new HashMap<>();
+        body.put("id", id);
+
+        return new ResponseEntity<>(body, HttpStatus.OK);
+        
     }
 
-    @PostMapping
-    public String createProfile(@RequestBody loginView entity) {
-        //TODO: process POST request
-        
-        return null;
+    @PostMapping("/signup")
+    public loginView createLogin(@RequestBody loginView entity) {
+
+        return loginService.create(entity);
+
     }
 }
