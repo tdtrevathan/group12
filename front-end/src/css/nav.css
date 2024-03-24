@@ -8,7 +8,14 @@
     margin: 10px;
 }
 
+#mainNav a.active {
+    background-color: #ffffff;
+    color: #FF9F06;
+}
+
 #mainNav a:hover {
     background-color: #FF9F06;
     border-color: #FF9F06;
+    color:#ffffff;
 }
+

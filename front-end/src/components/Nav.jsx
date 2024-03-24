@@ -1,6 +1,6 @@
 import '../css/nav.css';
 
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Nav ( {loggedInID} ) {
     return (
@@ -8,9 +8,9 @@ export default function Nav ( {loggedInID} ) {
 
             {loggedInID ?
                 <>
-                <Link to="/profile">Profile</Link>
-                <Link to="/fuelquote">Fuel Quote</Link>
-                <Link to="/quotehistory">Quote History</Link>
+                <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Profile</NavLink>
+                <NavLink to="/fuelquote" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Fuel Quote</NavLink>
+                <NavLink to="/quotehistory" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Quote History</NavLink>
                 </>
                 :
                 ''
