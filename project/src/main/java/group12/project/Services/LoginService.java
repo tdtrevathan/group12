@@ -32,6 +32,8 @@ public class LoginService {
 
     public loginView create(loginView login){
         if(login == null) return null;
+
+        //Add database option to check if username already exists
         
         return repo.insert(login);
     }
