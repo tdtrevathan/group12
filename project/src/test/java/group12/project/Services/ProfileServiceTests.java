@@ -2,8 +2,6 @@ package group12.project.Services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,7 +27,7 @@ class ProfileServiceTests {
 	public void getProfile_ShouldReturnProfile() throws Exception{
 
 		profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",
@@ -37,10 +35,10 @@ class ProfileServiceTests {
             "TX", 
             "77336");
 
-		Mockito.when(repo.findById(profile.getId()))
-			.thenReturn(Optional.of(profile));
+		Mockito.when(repo.findByUsername(profile.getUsername()))
+			.thenReturn(profile);
 
-		var result = profileService.get(profile.getId());
+		var result = profileService.get(profile.getUsername());
 
 		assertEquals(profile, result);
 	}
@@ -49,7 +47,7 @@ class ProfileServiceTests {
 	public void createProfile_ShouldCreateProfile() throws Exception{
 
 		profileView profile = new profileView (
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",

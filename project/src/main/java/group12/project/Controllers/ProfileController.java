@@ -29,12 +29,12 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    @GetMapping("{id}")
-    public ResponseEntity<profileView> get(@PathVariable String id) throws Exception {
+    @GetMapping("{username}")
+    public ResponseEntity<profileView> get(@PathVariable String username) throws Exception {
 
-        // var profile = profileService.get(id);
+        // var profile = profileService.get(username);
         profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",

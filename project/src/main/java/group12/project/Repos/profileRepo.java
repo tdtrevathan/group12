@@ -7,5 +7,5 @@ import group12.project.Views.profileView;
 
 @Repository
 public interface profileRepo extends MongoRepository<profileView, String> {
-    
+    profileView findByUsername(String username);
 }

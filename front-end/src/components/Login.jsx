@@ -3,7 +3,7 @@ import { Button, Input } from './FormFields';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login( {setLoggedInID} ) {
+export default function Login( {setLoggedInUsername} ) {
 
     const[profileComplete, setProfileComplete] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Login( {setLoggedInID} ) {
         e.preventDefault();
         try {
             //Sending login credentials to backend for authentication
-            const id = await fetch('/api/login/signin', {
+            const responseBody = await fetch('/api/login/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,22 +40,17 @@ export default function Login( {setLoggedInID} ) {
                 return response.json()
             })
             .then (data => {
-                return data.id;
+                return data;
             })
 
-            if (id == "Not found") {
+            console.log(responseBody)
+
+            if(formData.username == '' || formData.password == '' || !responseBody.username) {
                 throw new Error('Invalid username or password');
             }
 
-            if(formData.username == '' || formData.password == '') {
-                throw new Error('Invalid username or password');
-            }
-
-            //Redirect to profile page when successfully logged in
-
-            // const id = "65e9eca2a9308d1be0c7c94c"
-            console.log("ID: " + id);
-            setLoggedInID(id);
+            //Redirect to profile page when successfully logged in        
+            setLoggedInUsername(formData.username);
             navigate(`/profile`);
 
         } catch (error) {

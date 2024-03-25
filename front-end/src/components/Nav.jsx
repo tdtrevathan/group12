@@ -2,15 +2,15 @@ import '../css/nav.css';
 
 import { NavLink, Link } from "react-router-dom";
 
-export default function Nav ( {loggedInID} ) {
+export default function Nav ( {loggedInUsername} ) {
     return (
         <nav id="mainNav">
 
-            {loggedInID ?
+            {loggedInUsername ?
                 <>
-                <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Profile</NavLink>
-                <NavLink to="/fuelquote" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Fuel Quote</NavLink>
-                <NavLink to="/quotehistory" className={({ isActive }) => isActive ? 'active' : ''} activeClassName="active">Quote History</NavLink>
+                <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''}>Profile</NavLink>
+                <NavLink to="/fuelquote" className={({ isActive }) => isActive ? 'active' : ''}>Fuel Quote</NavLink>
+                <NavLink to="/quotehistory" className={({ isActive }) => isActive ? 'active' : ''}>Quote History</NavLink>
                 </>
                 :
                 ''

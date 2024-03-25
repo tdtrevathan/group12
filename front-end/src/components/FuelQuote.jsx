@@ -2,7 +2,7 @@ import {Button, Input, Radio, Select, Label} from './FormFields';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-export default function FuelQuote ( {loggedInID} ) {
+export default function FuelQuote ( {loggedInUsername} ) {
     
   const navigate = useNavigate();
 
@@ -63,7 +63,7 @@ export default function FuelQuote ( {loggedInID} ) {
     }
 
     useEffect(() => {
-        if(!loggedInID) {
+        if(!loggedInUsername) {
             navigate('/')
         }
       }, []);

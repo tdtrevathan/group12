@@ -11,12 +11,12 @@ public class ProfileService {
     @Autowired
     private profileRepo repo;
 
-    public profileView get(String id){
+    public profileView get(String username){
 
-        var result = repo.findById(id);
+        var result = repo.findByUsername(username);
 
-        if(result.get() == null) return new profileView();
-        return result.get();
+        if(result == null) return new profileView();
+        return result;
     }
     
     //Use this as reference for inserts
@@ -30,9 +30,10 @@ public class ProfileService {
         if(profile == null) return null;
 
 
-        var result = repo.findById(profile.getId()).get();
+        var result = repo.findByUsername(profile.getUsername());
 
         if(result != null){
+            result.setUsername(profile.getUsername());  
             result.setFullName(profile.getFullName());  
             result.setAddress1(profile.getAddress1());
             result.setAddress2(profile.getAddress2());

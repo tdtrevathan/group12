@@ -22,13 +22,12 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/signin")
-    public ResponseEntity<Map<String, String>> userLogin(@RequestBody loginView entity) throws Exception {
-
-        String id = loginService.getId(entity.getUsername());
-        // String id = "1";
-
-        Map<String, String> body = new HashMap<>();
-        body.put("id", id);
+    public ResponseEntity<Map<String, Boolean>> userLogin(@RequestBody loginView entity) throws Exception {
+       
+        var validate = loginService.validateLogin(entity);
+        
+        Map<String, Boolean> body = new HashMap<>();
+        body.put("username", validate);
 
         return new ResponseEntity<>(body, HttpStatus.OK);
         
