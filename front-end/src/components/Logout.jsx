@@ -6,6 +6,7 @@ export default function Logout( {loggedInUsername, setLoggedInUsername} ) {
 
     function logout() {
         setLoggedInUsername('')
+        localStorage.removeItem("username");
         navigate('/')
     }
 

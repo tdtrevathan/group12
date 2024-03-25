@@ -1,6 +1,6 @@
 import { Button, Input } from './FormFields';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login( {setLoggedInUsername} ) {
@@ -51,12 +51,26 @@ export default function Login( {setLoggedInUsername} ) {
 
             //Redirect to profile page when successfully logged in        
             setLoggedInUsername(formData.username);
+            localStorage.setItem("username", formData.username);
             navigate(`/profile`);
 
         } catch (error) {
             setError(error.message);
         }
     };
+
+    useEffect(() => {
+
+        var username = localStorage.getItem("username");
+
+        if(username) {
+            setLoggedInUsername(username);
+            navigate('/profile')
+        }
+
+
+
+      }, []);
 
     return (
         <form onSubmit={handleSubmit}>
