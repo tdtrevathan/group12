@@ -15,6 +15,7 @@
     padding: 40px;
     display: grid;
     align-items: center;
+    position: relative;
 }
 
 #outlet {

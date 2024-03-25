@@ -1,7 +1,6 @@
 package group12.project.Services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,15 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import group12.project.Repos.profileRepo;
-import group12.project.Services.ProfileService;
 import group12.project.Views.profileView;
-
-import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -33,7 +27,7 @@ class ProfileServiceTests {
 	public void getProfile_ShouldReturnProfile() throws Exception{
 
 		profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",
@@ -41,10 +35,10 @@ class ProfileServiceTests {
             "TX", 
             "77336");
 
-		Mockito.when(repo.findById(profile.getId()))
-			.thenReturn(Optional.of(profile));
+		Mockito.when(repo.findByUsername(profile.getUsername()))
+			.thenReturn(profile);
 
-		var result = profileService.get(profile.getId());
+		var result = profileService.get(profile.getUsername());
 
 		assertEquals(profile, result);
 	}
@@ -53,7 +47,7 @@ class ProfileServiceTests {
 	public void createProfile_ShouldCreateProfile() throws Exception{
 
 		profileView profile = new profileView (
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",
@@ -64,7 +58,7 @@ class ProfileServiceTests {
 		Mockito.when(repo.insert(profile))
 			.thenReturn(profile);
 		
-		var result = profileService.create(profile);
+		var result = profileService.upsert(profile);
 		assertEquals(profile, result);
 	}
 }

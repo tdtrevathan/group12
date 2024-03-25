@@ -10,17 +10,17 @@ import Registration from './components/Registration';
 
 export default function App() {
 
-  const [loggedInID, setLoggedInID] = useState('');
+  const [loggedInUsername, setLoggedInUsername] = useState('');
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Container loggedInID={loggedInID}/>}>
-          <Route index path="/" element={<Login setLoggedInID={setLoggedInID}/>} />
+        <Route path="" element={<Container loggedInUsername={loggedInUsername} setLoggedInUsername={setLoggedInUsername}/>}>
+          <Route index path="/" element={<Login setLoggedInUsername={setLoggedInUsername}/>} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/profile" element={<Profile loggedInID={loggedInID}/>} />
-          <Route path="/fuelquote" element={<FuelQuote loggedInID={loggedInID}/>} />
-          <Route path="/quotehistory" element={<QuoteHistory loggedInID={loggedInID}/>} />
+          <Route path="/profile" element={<Profile loggedInUsername={loggedInUsername}/>} />
+          <Route path="/fuelquote" element={<FuelQuote loggedInUsername={loggedInUsername}/>} />
+          <Route path="/quotehistory" element={<QuoteHistory loggedInUsername={loggedInUsername}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

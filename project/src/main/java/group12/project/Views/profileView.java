@@ -7,7 +7,7 @@ public class profileView {
     public profileView(){}
     
     public profileView(
-    String id,
+    String username,
     String fullName,
     String address1,
     String address2,
@@ -15,7 +15,7 @@ public class profileView {
     String state,
     String zipcode) throws Exception
     {
-        this.id = id;
+        this.username = username;
 
         if(isFirstNameValid(fullName)){
             this.fullName = fullName;
@@ -55,7 +55,7 @@ public class profileView {
         }
     }
 
-    private String id;
+    private String username;
     private String fullName;
     private String address1;
     private String address2;

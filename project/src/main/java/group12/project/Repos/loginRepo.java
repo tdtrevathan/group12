@@ -7,5 +7,5 @@ import group12.project.Views.loginView;
 
 @Repository
 public interface loginRepo extends MongoRepository<loginView, String> {
-    
+    loginView findByUsername(String username);
 }

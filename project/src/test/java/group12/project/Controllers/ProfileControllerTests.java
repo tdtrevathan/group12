@@ -32,7 +32,7 @@ class ProfileControllerTests {
 	@Test
 	public void getProfileViewWithIdOf1_ShouldReturnDummyData() throws Exception{
 		profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",
@@ -41,13 +41,13 @@ class ProfileControllerTests {
             "77336"
 		);
 
-		Mockito.when(repo.findById(profile.getId()))
-		.thenReturn(Optional.of(profile));
+		Mockito.when(repo.findByUsername(profile.getUsername()))
+		.thenReturn(profile);
 		
-		Mockito.when(service.get(profile.getId()))
+		Mockito.when(service.get(profile.getUsername()))
 			.thenReturn(profile);
 		
-		var result = controller.get("1");
+		var result = controller.get("Admin");
 
 		assertEquals(profile, result.getBody());
 	}
@@ -55,7 +55,7 @@ class ProfileControllerTests {
 	@Test
 	public void createProfile_SuccesfullyCreatesProfile() throws Exception{ 
 		profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",

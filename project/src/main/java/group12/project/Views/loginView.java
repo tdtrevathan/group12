@@ -7,14 +7,14 @@ public class loginView {
     public loginView() {}
 
     public loginView(
-        String userName,
+        String username,
         String password
     )
     {
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 
-    private String userName;
+    private String username;
     private String password;
 }

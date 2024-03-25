@@ -3,7 +3,7 @@ import { Button, Input } from './FormFields';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login( {setLoggedInID} ) {
+export default function Login( {setLoggedInUsername} ) {
 
     const[profileComplete, setProfileComplete] = useState(false);
 
@@ -27,33 +27,32 @@ export default function Login( {setLoggedInID} ) {
         e.preventDefault();
         try {
             //Sending login credentials to backend for authentication
-            // const response = await fetch('/api/login', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(formData)
-            // });
+            const responseBody = await fetch('/api/login/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }).then(response => {
+                if(!response.ok) {
+                    throw new Error('Connection failed');
+                }
+                return response.json()
+            })
+            .then (data => {
+                return data;
+            })
 
-            // if (!response.ok) {
-            //     //Handling unsuccessful login
-            //     throw new Error('Invalid username or password');
-            // }
+            console.log(responseBody)
 
-            if(formData.username == '' || formData.password == '') {
+            if(formData.username == '' || formData.password == '' || !responseBody.username) {
                 throw new Error('Invalid username or password');
             }
 
-            //Redirect to profile page when successfully logged in
+            //Redirect to profile page when successfully logged in        
+            setLoggedInUsername(formData.username);
+            navigate(`/profile`);
 
-            if(profileComplete) {
-                navigate('/fuelquote')
-            }
-            else {
-                const id = "65e9eca2a9308d1be0c7c94c"
-                setLoggedInID(id);
-                navigate(`/profile`);
-            }
         } catch (error) {
             setError(error.message);
         }

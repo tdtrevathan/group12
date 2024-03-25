@@ -15,7 +15,7 @@ class ProfileViewTests {
 	@Test
 	public void createProfileView_valuesAreSetCorrectly() throws Exception{
 		profileView profile = new profileView(
-            "1",
+            "Admin",
             "Timothy",
             "My Address",
             "",
@@ -24,7 +24,7 @@ class ProfileViewTests {
             "77336"
 		);
 
-		assertEquals("1", profile.getId());
+		assertEquals("Admin", profile.getUsername());
 		assertEquals("Timothy", profile.getFullName());
 		assertEquals("My Address", profile.getAddress1());
 		assertEquals("", profile.getAddress2());
@@ -40,7 +40,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				badParameter,
 				"My Address",
 				"",
@@ -60,7 +60,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				badParameter,
 				"My Address",
 				"",
@@ -80,7 +80,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				badParameter,
 				"",
@@ -100,7 +100,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				badParameter,
 				"",
@@ -120,7 +120,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				badParameter,
@@ -140,7 +140,7 @@ class ProfileViewTests {
 		assertDoesNotThrow(
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				badParameter,
@@ -158,7 +158,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -178,7 +178,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -198,7 +198,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -218,7 +218,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -238,7 +238,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -258,7 +258,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -278,7 +278,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -298,7 +298,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",
@@ -318,7 +318,7 @@ class ProfileViewTests {
 		var result = assertThrows(Exception.class,
 		()->{
 			new profileView(
-				"1",
+				"Admin",
 				"Timothy",
 				"Address1",
 				"",

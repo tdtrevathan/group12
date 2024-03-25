@@ -16,6 +16,14 @@ form input {
     padding: 5px;
     font-size: 18px;
     margin-bottom: 20px;
+    color: #7F2714;
+}
+
+form .username {
+    font-size: 18px;
+    line-height: 18px;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .filledData {

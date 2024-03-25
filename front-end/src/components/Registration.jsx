@@ -1,4 +1,4 @@
-import {Button, Input, Radio, Select} from './FormFields';
+import { Button, Input } from './FormFields';
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +54,7 @@ export default function Registration () {
 
 
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
         const validationErrors = {}
         const validationErrorClass = {}
@@ -79,6 +79,10 @@ export default function Registration () {
             validationErrors.password = 'ERROR: Too small'
             validationErrorClass.password = 'error';
         }
+        else if(formData.password.toLowerCase() != password) {
+            validationErrors.password = 'ERROR: Must contain at least one uppercase letter'
+            validationErrorClass.password = 'error'; 
+        }
         else if(!/(?=.*[0-9])/.test(formData.password)){
             validationErrors.password = 'ERROR: Must contain at least one number'
             validationErrorClass.password = 'error';
@@ -99,7 +103,18 @@ export default function Registration () {
         setErrorClass(validationErrorClass)
         
         if(Object.keys(validationErrors).length === 0){
-            navigate("/")
+            const response = await fetch('/api/login/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if(response.ok) {
+                alert("User successfully registered");
+                navigate("/")
+            }
         }
     }
 

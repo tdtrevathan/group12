@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Select } from './FormFields';
 
-export default function Profile ( {loggedInID} ) {
+export default function Profile ( {loggedInUsername} ) {
     
     const navigate = useNavigate();
-    const id = loggedInID;
+    const username = loggedInUsername;
 
     const states = ['', 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
     const [errors, setErrors] = useState({})
     const [errorClass, setErrorClass] = useState({})
     const [formData, setFormData] = useState({
+        username: username,
         fullName: '',
         address1: '',
         address2: '',
@@ -122,7 +123,7 @@ export default function Profile ( {loggedInID} ) {
 
     async function getProfile(){
 
-        return await fetch(`/api/profile/${id}`, {
+        return await fetch(`/api/profile/${username}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -153,7 +154,7 @@ export default function Profile ( {loggedInID} ) {
 
     useEffect(() => {
 
-        if(!loggedInID) {
+        if(!loggedInUsername) {
             navigate('/')
             return;
         }
@@ -164,7 +165,11 @@ export default function Profile ( {loggedInID} ) {
 
     return (
         <>
+
         <form onSubmit={handleSubmit}>
+            
+            <label>Username:</label>
+            <div class="username">{loggedInUsername}</div>
             <Input name='fullName' label='Full Name: *' type='text' className={errorClass.fullName} handleChange={handleChange}></Input>
             {errors.fullName && <span class='error'>{errors.fullName}</span>}
             

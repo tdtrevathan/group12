@@ -11,14 +11,23 @@ public class LoginService {
     @Autowired
     private loginRepo repo;
 
-    public loginView get(String username, String password){
+    public Boolean validateLogin(loginView login) throws Exception {
 
-        //var result = repo.findById(id);
+        // var result = repo.findByUsername(login.getUsername()); //Database option
 
-        //if(result.get() == null) return new loginView();
-        //return result.get();
+        loginView result = new loginView(
+            "Admin",
+            "P@ssw0rd"
+        );
 
-        return new loginView("user", "Pa$$word22");
+        var resultPass = result.getPassword();
+        var loginPass = login.getPassword();
+
+        if(result == null || !loginPass.equals(resultPass)) {
+            return false;
+        }
+
+        return true;
     }
 
     public loginView create(loginView login){
