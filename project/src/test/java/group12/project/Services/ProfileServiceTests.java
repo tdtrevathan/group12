@@ -55,10 +55,37 @@ class ProfileServiceTests {
             "TX", 
             "77336");
 
-		Mockito.when(repo.insert(profile))
+		Mockito.when(repo.findByUsername(profile.getUsername()))
+			.thenReturn(profile);
+
+		Mockito.when(repo.save(profile))
 			.thenReturn(profile);
 		
 		var result = profileService.upsert(profile);
 		assertEquals(profile, result);
+	}
+
+	@Test
+	public void updatedProfileElement_ShouldBeUpdated() throws Exception{
+
+		profileView profile = new profileView (
+            "Admin",
+            "Timothy",
+            "My Address",
+            "",
+            "Houston", 
+            "TX", 
+            "77336");
+
+		Mockito.when(repo.findByUsername(profile.getUsername()))
+			.thenReturn(profile);
+		
+		Mockito.when(repo.save(profile))
+			.thenReturn(profile);
+			
+		profile.setFullName("Jimothy");
+		
+		var result = profileService.upsert(profile);
+		assertEquals(profile.getFullName(), result.getFullName());
 	}
 }
