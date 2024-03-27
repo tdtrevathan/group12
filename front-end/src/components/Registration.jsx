@@ -68,34 +68,42 @@ export default function Registration () {
             validationErrorClass.username = 'error';
         }
         if(!formData.password){
+            console.log('ERROR: required')
             validationErrors.password = 'ERROR: required'
             validationErrorClass.password = 'error';
         }
         else if(formData.password.length > 50){
+            console.log('ERROR: length exceeded')
             validationErrors.password = 'ERROR: length exceeded'
             validationErrorClass.password = 'error';
         }
         else if(formData.password.length < 8){
+            console.log('ERROR: Too small')
             validationErrors.password = 'ERROR: Too small'
             validationErrorClass.password = 'error';
         }
-        else if(formData.password.toLowerCase() != password) {
+        else if(formData.password.toLowerCase() == formData.password) {
+            console.log('ERROR: Must contain at least one uppercase letter')
             validationErrors.password = 'ERROR: Must contain at least one uppercase letter'
             validationErrorClass.password = 'error'; 
         }
         else if(!/(?=.*[0-9])/.test(formData.password)){
+            console.log('ERROR: Must contain at least one number')
             validationErrors.password = 'ERROR: Must contain at least one number'
             validationErrorClass.password = 'error';
         }
         else if(!/(?=.*[!@#$%^&*])/.test(formData.password)){
+            console.log('ERROR: Must contain at least one special character (!@#$%^&*)')
             validationErrors.password = 'ERROR: Must contain at least one special character (!@#$%^&*)'
             validationErrorClass.password = 'error';
         }
         if(!formData.checkPassword){
+            console.log('check ERROR: required')
             validationErrors.checkPassword = 'ERROR: required'
             validationErrorClass.checkPassword = 'error';
         }
         else if(formData.checkPassword !== formData.password){
+            console.log('check ERROR: Passwords do not match')
             validationErrors.checkPassword = 'ERROR: Passwords do not match'
             validationErrorClass.checkPassword = 'error';
         }
