@@ -8,10 +8,10 @@ export function Label ( {name, label} ) {
     )
 }
 
-export function Button ( { buttonText, name, type } ) {
+export function Button ( { buttonText, name, type, className, onClick } ) {
     return (
         <>
-        <button name={name} type={type}>{buttonText}</button>
+        <button className={className} name={name} type={type} onClick={onClick}>{buttonText}</button>
         </>
     )
 }

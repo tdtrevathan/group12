@@ -9,26 +9,26 @@ public class fuelQuoteView {
     public fuelQuoteView() {}
 
     public fuelQuoteView(
-        double gallons,
+        String username,
+        String gallons,
         String address,
-        Date date,
-        double rate,
-        double total,
-        String userId
+        String date,
+        String rate,
+        String total
     )
     {
+        this.username = username;
         this.gallons = gallons;
         this.address = address;
         this.date = date;
         this.rate = rate;
         this.total = total;
-        this.userId = userId;
     }
 
-    private double gallons;
+    private String username;
+    private String gallons;
     private String address;
-    private Date date;
-    private double rate;
-    private double total;
-    private String userId;
+    private String date;
+    private String rate;
+    private String total;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Table } from './Table';
 
@@ -6,29 +6,7 @@ export default function QuoteHistory ( {loggedInUsername} ) {
     
     const navigate = useNavigate();
 
-    const previousQuotes = [
-        {
-            gallons: 1,
-            address: '333 Fake Address Avenue',
-            date: '01-05-2020',
-            retrievedRate: 3.55,
-            calculatedTotal: 100,
-        },
-        {
-            gallons: 5,
-            address: '1234 Not Real Blvd',
-            date: '11-23-1965',
-            retrievedRate: 0.55,
-            calculatedTotal: 250,
-        },
-        {
-            gallons: 2,
-            address: '88 Main Street',
-            date: '04-12-2001',
-            retrievedRate: 2.00,
-            calculatedTotal: 4.00,
-        },
-    ]
+    const [quoteHistory, setQuoteHistory] = useState([]);
 
     const headers = [
         'Gallons',
@@ -38,15 +16,39 @@ export default function QuoteHistory ( {loggedInUsername} ) {
         'Total'
     ]
 
+    async function getQuoteHistory() {
+
+        await fetch(`/api/fuelQuote/${loggedInUsername}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            return response.json()
+        })
+        .then(data => {
+           console.log(data) 
+           var quotes = [];
+           for(var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            quotes.push(data[i]);
+           }
+           console.log(quotes)
+           setQuoteHistory(quotes);
+        });
+
+    }
+
     useEffect(() => {
         if(!loggedInUsername) {
             navigate('/')
         }
+        getQuoteHistory();
       }, []);
 
     return (
         <>
-        <Table headers={headers} rows={previousQuotes}></Table>
+        <Table headers={headers} rows={quoteHistory}></Table>
         </>
     )
 }
