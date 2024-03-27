@@ -17,8 +17,8 @@ export function Table ({headers, rows}){
                         <td>{item.gallons}</td>
                         <td>{item.address}</td>
                         <td>{item.date}</td>
-                        <td>{item.retrievedRate}</td>
-                        <td>{item.calculatedTotal}</td>
+                        <td>{item.rate}</td>
+                        <td>{item.total}</td>
                     </tr>
                 })
             }

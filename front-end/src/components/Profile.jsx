@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Select } from './FormFields';
 
-export default function Profile ( {loggedInUsername} ) {
+export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
     
     const navigate = useNavigate();
     const username = loggedInUsername;
@@ -133,19 +133,23 @@ export default function Profile ( {loggedInUsername} ) {
 
             setFormData((formData) => data)
             
-          let fullName = document.getElementsByName('fullName');
-          let address1 = document.getElementsByName('address1');
-          let address2 = document.getElementsByName('address2');
-          let city = document.getElementsByName('city');
-          let state = document.getElementsByName('state');
-          let zipcode = document.getElementsByName('zipcode');
+            let fullName = document.getElementsByName('fullName');
+            let address1 = document.getElementsByName('address1');
+            let address2 = document.getElementsByName('address2');
+            let city = document.getElementsByName('city');
+            let state = document.getElementsByName('state');
+            let zipcode = document.getElementsByName('zipcode');
 
-          fullName[0].value = data.fullName;
-          address1[0].value = data.address1;
-          address2[0].value = data.address2;
-          city[0].value = data.city;
-          state[0].value = data.state;
-          zipcode[0].value = data.zipcode;
+            fullName[0].value = data.fullName;
+            address1[0].value = data.address1;
+            address2[0].value = data.address2;
+            city[0].value = data.city;
+            state[0].value = data.state;
+            zipcode[0].value = data.zipcode;
+
+            setLoggedInAddress(data.address1 + " " + data.address2 + " " + data.city + ", " + data.state + " " + data.zipcode)
+
+
         })
         .catch(e => {
           console.log(e);

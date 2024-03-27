@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.bson.json.JsonObject;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class ProfileController {
         profileView profile = new profileView(
             "Admin",
             "Timothy",
-            "My Address",
+            "333 Fake Address Avenue",
             "",
             "Houston", 
             "TX", 

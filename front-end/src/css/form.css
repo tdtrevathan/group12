@@ -65,34 +65,51 @@ form #state {
     gap: 20px;
 }
 
+span.confirm,
 span.error {
     width: 100%;
     max-width: 600px;
     display: block;
-    color: #ff0000;
+    color: #14ae2b;
     font-size: 12px;
     text-align: right;
     height: 20px;
     font-weight: 700;
 }
 
+span.confirm {
+    color: #14ae2b;
+}
+
+span.error {
+    color: #ff0000;
+}
+
 form button {
     background-color: #7F2714;
     color: #ffffff;
-    display: block;
+    display: inline-block;
     outline: none;
-    border: none;
-    width: 100%;
+    border: 2px solid #7F2714;
+    width: 49%;
     max-width: 300px;
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 26px;
+}
+
+form button.outline {
+    background-color: transparent;
+    color:#7F2714;
+    margin-right: 2%;
 }
 
 form button:hover {
     background-color: #FF9F06;
+    border-color: #FF9F06;
+    color: #ffffff;
 }
 
 .register {
