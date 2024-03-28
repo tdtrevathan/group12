@@ -10,21 +10,12 @@ public class fuelQuoteView {
 
     public fuelQuoteView(
         String username,
-        String gallons,
+        /*String gallons,*/
+        Integer gallons,
         String address,
-<<<<<<< Updated upstream
         String date,
         String rate,
-        String total
-    )
-    {
-        this.username = username;
-=======
-        Date date,
-        double rate,
-        double total,
-        String userId
-    ) throws Exception
+        String total) throws Exception
     {
         if(isGallonsValid(gallons)){
             this.gallons = gallons;
@@ -38,7 +29,6 @@ public class fuelQuoteView {
         else{
             throw new Exception(date + "was not valid");
         }
->>>>>>> Stashed changes
         this.gallons = gallons;
         this.address = address;
         this.date = date;
@@ -47,25 +37,19 @@ public class fuelQuoteView {
     }
 
     private String username;
-    private String gallons;
+    /*private String gallons;*/
+    private Integer gallons;
     private String address;
-<<<<<<< Updated upstream
     private String date;
     private String rate;
     private String total;
-=======
-    private Date date;
-    private double rate;
-    private double total;
-    private String userId;
-
-    private boolean isGallonsValid(double inputGallons){
-        if(inputGallons <=0 || inputGallons == 0) return false;
+    
+    private boolean isGallonsValid(Integer inputGallons){
+        if(inputGallons < 0 || inputGallons == 0) return false;
         return true;
     }
-    private boolean isDateValid(date inputDate){
-        if(!inputDate) return false;
+    private boolean isDateValid(String inputDate){
+        if(inputDate.length() == 0) return false;
         return true;
     }
->>>>>>> Stashed changes
 }
