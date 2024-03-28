@@ -35,7 +35,7 @@ public class FuelQuoteController {
 
     @PostMapping("/getQuote")
     public ResponseEntity<fuelQuoteView> getQuote(@RequestBody fuelQuoteView entity) {
-        fuelQuoteView fuelQuote = fuelQuoteService.getRateTotal(entity);
+        fuelQuoteView fuelQuote = fuelQuoteService.getQuoteWithRateTotal(entity);
         return new ResponseEntity<fuelQuoteView>(fuelQuote, HttpStatus.OK);
     }
     
