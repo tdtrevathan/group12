@@ -10,8 +10,7 @@ public class fuelQuoteView {
 
     public fuelQuoteView(
         String username,
-        /*String gallons,*/
-        Integer gallons,
+        String gallons,
         String address,
         String date,
         String rate,
@@ -37,15 +36,14 @@ public class fuelQuoteView {
     }
 
     private String username;
-    /*private String gallons;*/
-    private Integer gallons;
+    private String gallons;
     private String address;
     private String date;
     private String rate;
     private String total;
     
-    private boolean isGallonsValid(Integer inputGallons){
-        if(inputGallons < 0 || inputGallons == 0) return false;
+    private boolean isGallonsValid(String inputGallons){
+        if(inputGallons.length() == 0) return false;
         return true;
     }
     private boolean isDateValid(String inputDate){
