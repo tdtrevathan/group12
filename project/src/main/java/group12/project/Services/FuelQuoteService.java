@@ -17,27 +17,17 @@ public class FuelQuoteService {
 
     public List<fuelQuoteView> getHistory(String username) {
 
+        // List<fuelQuoteView> quoteHistory = repo.findByUsername(username);
+
         List<fuelQuoteView> quoteHistory = new ArrayList<>();
         quoteHistory.add(new fuelQuoteView("Admin", "1.00", "333 Fake Address Avenue", "01-05-2020", "3.55", "100.00"));
         quoteHistory.add(new fuelQuoteView("Admin", "5.00", "1234 Not Real Blvd", "11-23-1965", "0.55", "250.00"));
-        quoteHistory.add(new fuelQuoteView("Admin", "2.00", "88 Main Street", "04-12-2001", "2.00", "4.00"));
-
-        // List<JSONObject> entities = new ArrayList<JSONObject>();
-        // for (fuelQuoteView quote : quoteHistory) {
-        //     JSONObject entity = new JSONObject();
-        //     entity.put("username", quote.getUsername());
-        //     entity.put("gallons", quote.getGallons());
-        //     entity.put("address", quote.getAddress());
-        //     entity.put("date", quote.getDate());
-        //     entity.put("rate", quote.getRate());
-        //     entity.put("total", quote.getTotal());
-        //     entities.add(entity);
-        // }        
+        quoteHistory.add(new fuelQuoteView("Admin", "2.00", "88 Main Street", "04-12-2001", "2.00", "4.00"));      
 
         return quoteHistory;
     }
 
-    public fuelQuoteView getRateTotal(fuelQuoteView fuelQuote) {
+    public fuelQuoteView getQuoteWithRateTotal(fuelQuoteView fuelQuote) {
 
         Double rate = PricingModule.calculateRate(fuelQuote);
         Double total = PricingModule.calculateTotal(rate, fuelQuote.getGallons());
