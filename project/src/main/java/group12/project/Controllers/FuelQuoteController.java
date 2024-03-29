@@ -26,7 +26,7 @@ public class FuelQuoteController {
     private FuelQuoteService fuelQuoteService;
 
     @GetMapping("{username}")
-    public ResponseEntity<List<fuelQuoteView>> getAll(@PathVariable String username) {
+    public ResponseEntity<List<fuelQuoteView>> getAll(@PathVariable String username) throws Exception {
 
         List<fuelQuoteView> quoteHistory = fuelQuoteService.getHistory(username);
 
@@ -34,7 +34,7 @@ public class FuelQuoteController {
     }
 
     @PostMapping("/getQuote")
-    public ResponseEntity<fuelQuoteView> getQuote(@RequestBody fuelQuoteView entity) {
+    public ResponseEntity<fuelQuoteView> getQuote(@RequestBody fuelQuoteView entity) throws Exception {
         fuelQuoteView fuelQuote = fuelQuoteService.getQuoteWithRateTotal(entity);
         return new ResponseEntity<fuelQuoteView>(fuelQuote, HttpStatus.OK);
     }

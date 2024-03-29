@@ -30,7 +30,7 @@ public class FuelQuoteControllerTests {
     FuelQuoteController controller = new FuelQuoteController();
 
     @Test
-    public void getAll_results() {
+    public void getAll_results() throws Exception {
 
         String username = "Admin";
 
@@ -70,7 +70,7 @@ public class FuelQuoteControllerTests {
     }
 
     @Test
-    public void submitQuote_quoteSubmitted() {
+    public void submitQuote_quoteSubmitted() throws Exception {
 
         fuelQuoteView fuelQuote = new fuelQuoteView(
             "Admin",

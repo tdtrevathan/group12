@@ -13,12 +13,12 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
     const [errorClass, setErrorClass] = useState({})
     const [formData, setFormData] = useState({
         username: username,
-        fullName: '',
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zipcode: ''
+        fullName: "",
+        address1: "",
+        address2: "",
+        city: "",
+        state: "",
+        zipcode: ""
     })
 
     const handleChange = (e) => {
@@ -56,7 +56,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             validationErrorClass.address1 = 'error';
         }
 
-        if(formData.address2.length > 100){
+        if(formData.address2 && formData.address2.length > 100){
             validationErrors.address2 = 'ERROR: length exceeded'
             validationErrorClass.address2 = 'error';
         }
@@ -97,7 +97,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
 
         if(Object.keys(validationErrors).length === 0){
             try {
-                console.log(formData.fullName)
+                console.log(formData.username)
                  const response = await fetch('/api/profile', {
                      method: 'POST',
                      headers: {
@@ -147,7 +147,10 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             state[0].value = data.state;
             zipcode[0].value = data.zipcode;
 
-            setLoggedInAddress(data.address1 + " " + data.address2 + " " + data.city + ", " + data.state + " " + data.zipcode)
+            setLoggedInAddress(data.address1 + " " + data.address2 + data.city + ", " + data.state + " " + data.zipcode)
+            setFormData({
+                ...formData, [username] : loggedInUsername
+            });
 
 
         })

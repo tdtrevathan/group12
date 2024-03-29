@@ -31,16 +31,7 @@ public class ProfileController {
     @GetMapping("{username}")
     public ResponseEntity<profileView> get(@PathVariable String username) throws Exception {
 
-        // var profile = profileService.get(username);
-        profileView profile = new profileView(
-            "Admin",
-            "Timothy",
-            "333 Fake Address Avenue",
-            "",
-            "Houston", 
-            "TX", 
-            "77336"
-		);
+        var profile = profileService.get(username);
 
         return new ResponseEntity<profileView>(profile, HttpStatus.OK);
     }
@@ -48,6 +39,10 @@ public class ProfileController {
     @PostMapping
     public profileView createProfile(@RequestBody profileView entity) {
 
+        if(entity.getUsername() == null) {
+            return entity;
+        }
+        
         return profileService.upsert(entity);
     }
 }
