@@ -15,8 +15,12 @@ public class fuelQuoteTest {
     @Test
 	public void createFuelQuoteView_valuesAreSetCorrectly() throws Exception{
 		fuelQuoteView fuelQuote = new fuelQuoteView(
-            gallons:"10",
-            date: "2024-03-12"
+            "",
+            "10",
+            "",
+            "2024-03-12",
+            "",
+            ""
 		);
 
 		assertEquals("10", fuelQuote.getGallons());
@@ -31,13 +35,79 @@ public class fuelQuoteTest {
 		var result = assertThrows(Exception.class,
 		()->{
 			new fuelQuoteView(
+                "",
 				badParameter,
-                date:"2024-02-14"
+                "",
+                "2024-02-14",
+                "",
+                ""
+
 				
 			);
 		});
 
-		assertEquals(result.getMessage(), badParameter + "was not valid");
+		assertEquals(result.getMessage(), badParameter + " was not valid");
+	}
+    @Test
+	public void createFuelQuoteView_GallonsNegative_ExceptionThrown() throws Exception{
+		var badParameter = "-10";
+		
+		var result = assertThrows(Exception.class,
+		()->{
+			new fuelQuoteView(
+                "",
+				badParameter,
+                "",
+                "2024-02-14",
+                "",
+                ""
+
+				
+			);
+		});
+
+		assertEquals(result.getMessage(), badParameter + " was not valid");
+	}
+    @Test
+	public void createFuelQuoteView_GallonsZero_ExceptionThrown() throws Exception{
+		var badParameter = "0";
+		
+		var result = assertThrows(Exception.class,
+		()->{
+			new fuelQuoteView(
+                "",
+				badParameter,
+                "",
+                "2024-02-14",
+                "",
+                ""
+
+				
+			);
+		});
+
+		assertEquals(result.getMessage(), badParameter + " was not valid");
+	}
+   
+    @Test
+	public void createFuelQuoteView_DateWrongFormat_ExceptionThrown() throws Exception{
+		var badParameter = "01-23-2024";
+		
+		var result = assertThrows(Exception.class,
+		()->{
+			new fuelQuoteView(
+                "",
+				"10",
+                "",
+                badParameter,
+                "",
+                ""
+
+				
+			);
+		});
+
+		assertEquals(result.getMessage(), badParameter + " was not valid");
 	}
     
 }
