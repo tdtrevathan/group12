@@ -1,4 +1,6 @@
 package group12.project.Views;
+import org.bson.types.ObjectId;
+
 import lombok.Data;
 
 @Data
@@ -55,6 +57,7 @@ public class profileView {
         }
     }
 
+    private ObjectId _id;
     private String username;
     private String fullName;
     private String address1;
