@@ -58,19 +58,19 @@ public class FuelQuoteServiceTests {
             "1708.29"
             );
 
-        try (MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class)) {
-            pricingModule.when(() -> PricingModule.calculateRate(fuelQuote))
-                .thenReturn(1.71);
-        }
+        Mockito.when(repo.findByUsername(fuelQuote.getUsername()))
+            .thenReturn(null);
 
-        try (MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class)) {
-            pricingModule.when(() -> PricingModule.calculateTotal(1.71, fuelQuote.getGallons()))
-                .thenReturn(1708.29);
-        }
+        MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class);
+        pricingModule.when(() -> PricingModule.calculateRate(fuelQuote, false))
+            .thenReturn(1.71);
+
+        pricingModule.when(() -> PricingModule.calculateTotal(1.71, fuelQuote.getGallons()))
+            .thenReturn(1708.29);
 
         var result = fuelQuoteService.getQuoteWithRateTotal(fuelQuote);
 
-        assertEquals(result, fuelQuote);
+        assertEquals(fuelQuote, result);
 
     }
 

@@ -24,7 +24,9 @@ public class FuelQuoteService {
 
     public fuelQuoteView getQuoteWithRateTotal(fuelQuoteView fuelQuote) throws Exception {
 
-        Double rate = PricingModule.calculateRate(fuelQuote);
+        List<fuelQuoteView> quoteHistory = repo.findByUsername(fuelQuote.getUsername());   
+
+        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory != null ? true : false);
         Double total = PricingModule.calculateTotal(rate, fuelQuote.getGallons());
 
         return new fuelQuoteView(
