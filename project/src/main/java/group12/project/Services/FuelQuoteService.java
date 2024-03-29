@@ -26,8 +26,7 @@ public class FuelQuoteService {
 
         List<fuelQuoteView> quoteHistory = repo.findByUsername(fuelQuote.getUsername());   
 
-        
-        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory.size() > 0);
+        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory != null ? true : false);
         Double total = PricingModule.calculateTotal(rate, fuelQuote.getGallons());
 
         return new fuelQuoteView(
