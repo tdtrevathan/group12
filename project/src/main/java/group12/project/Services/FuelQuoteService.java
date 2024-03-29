@@ -1,6 +1,6 @@
 package group12.project.Services;
 
-import java.util.*;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,6 @@ public class FuelQuoteService {
 
     public fuelQuoteView insert(fuelQuoteView fuelQuote) {
         if(fuelQuote == null) return null;
-
         return repo.insert(fuelQuote);
     }
 

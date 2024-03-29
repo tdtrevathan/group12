@@ -39,10 +39,9 @@ public class ProfileService {
             result.setCity(profile.getCity());
             result.setState(profile.getState());
             result.setZipcode(profile.getZipcode());
-
             return repo.save(result);
         }
-        else{
+        else {
             return repo.insert(profile);
         }
 

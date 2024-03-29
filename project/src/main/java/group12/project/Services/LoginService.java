@@ -26,10 +26,7 @@ public class LoginService {
     }
 
     public loginView create(loginView login){
-        if(login == null) return null;
-
-        if(repo.findByUsername(login.getUsername()) != null) return null;
-        
+        if(login == null || repo.findByUsername(login.getUsername()) != null) return null;
         return repo.insert(login);
     }
 }
