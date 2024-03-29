@@ -42,5 +42,9 @@ public class ProfileService {
 
             return repo.save(result);
         }
+        else{
+            return repo.insert(profile);
+        }
+
     }
 }
