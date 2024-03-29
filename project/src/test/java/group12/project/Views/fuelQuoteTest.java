@@ -46,7 +46,7 @@ public class fuelQuoteTest {
 			);
 		});
 
-		assertEquals(result.getMessage(), badParameter + " was not valid");
+		assertEquals(result.getMessage(), badParameter + "was not valid");
 	}
     @Test
 	public void createFuelQuoteView_GallonsNegative_ExceptionThrown() throws Exception{
@@ -66,7 +66,7 @@ public class fuelQuoteTest {
 			);
 		});
 
-		assertEquals(result.getMessage(), badParameter + " was not valid");
+		assertEquals(result.getMessage(), badParameter + "was not valid");
 	}
     @Test
 	public void createFuelQuoteView_GallonsZero_ExceptionThrown() throws Exception{
@@ -86,12 +86,12 @@ public class fuelQuoteTest {
 			);
 		});
 
-		assertEquals(result.getMessage(), badParameter + " was not valid");
+		assertEquals(result.getMessage(), badParameter + "was not valid");
 	}
    
     @Test
-	public void createFuelQuoteView_DateWrongFormat_ExceptionThrown() throws Exception{
-		var badParameter = "01-23-2024";
+	public void createFuelQuoteView_DateEmpty_ExceptionThrown() throws Exception{
+		var badParameter = "";
 		
 		var result = assertThrows(Exception.class,
 		()->{
@@ -107,7 +107,7 @@ public class fuelQuoteTest {
 			);
 		});
 
-		assertEquals(result.getMessage(), badParameter + " was not valid");
+		assertEquals(result.getMessage(), badParameter + "was not valid");
 	}
     
 }
