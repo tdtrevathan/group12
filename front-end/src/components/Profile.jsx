@@ -97,26 +97,32 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
 
         if(Object.keys(validationErrors).length === 0){
             try {
-                console.log(formData.username)
+
                  const response = await fetch('/api/profile', {
                      method: 'POST',
                      headers: {
                          'Content-Type': 'application/json'
                      },
                      body: JSON.stringify(formData)
+                 }).then(response => {
+                    if (!response.ok) {
+                        //Handling unsuccessful creation
+                        throw new Error('Did not create profile');
+                    }
+                    return response.json();
+                 }).then(data => {
+                    console.log(data);
+                    var address2String = data.address2 != null ? data.address2 + " " : "";
+                    setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
                  });
                  
                  //To show that post works
-                 console.log(response)
+                 console.log(response);
                  
-                 if (!response.ok) {
-                     //Handling unsuccessful creation
-                     throw new Error('Did not create profile');
-                 }
                  
 
             } catch (error) {
-                //setError(error.message);
+                // setError(error.message);
             }
         }
     }
@@ -131,7 +137,9 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         }).then(response => response.json())
         .then(data => {
 
-            setFormData((formData) => data)
+            var tempForm = data;
+            tempForm.username = loggedInUsername;
+            setFormData(tempForm);
             
             let fullName = document.getElementsByName('fullName');
             let address1 = document.getElementsByName('address1');
@@ -147,11 +155,8 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             state[0].value = data.state;
             zipcode[0].value = data.zipcode;
 
-            setLoggedInAddress(data.address1 + " " + data.address2 + data.city + ", " + data.state + " " + data.zipcode)
-            setFormData({
-                ...formData, [username] : loggedInUsername
-            });
-
+            var address2String = data.address2 != null ? data.address2 + " " : "";
+            setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
 
         })
         .catch(e => {
@@ -200,7 +205,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             <Input name='zipcode' label='Zipcode: *' type='text' className={errorClass.zipcode} handleChange={handleChange}></Input>
             {errors.zipcode && <span class='error'>{errors.zipcode}</span>}
 
-            <Button name='submitButton' type='submit' buttonText='Edit'></Button>
+            <Button name='submitButton' type='submit' buttonText='Save'></Button>
         </form>
         </>
     )
