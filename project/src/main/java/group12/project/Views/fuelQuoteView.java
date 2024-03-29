@@ -43,7 +43,7 @@ public class fuelQuoteView {
     private String total;
     
     private boolean isGallonsValid(String inputGallons){
-        if(inputGallons.length() == 0 || inputGallons.startsWith("-")) return false;
+        if(inputGallons.length() == 0 || inputGallons.startsWith("-") || inputGallons.equals("0")) return false;
         /*check if gallons is greater than 0 */
         return true;
     }
