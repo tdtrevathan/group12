@@ -1,7 +1,6 @@
 package group12.project.Controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +11,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import group12.project.Controllers.FuelQuoteController;
 import group12.project.Repos.fuelQuoteRepo;
-import group12.project.Views.fuelQuoteView;
 import group12.project.Services.FuelQuoteService;
+import group12.project.Views.fuelQuoteView;
 
 @SpringBootTest
 public class FuelQuoteControllerTests {

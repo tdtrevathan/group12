@@ -2,7 +2,8 @@ package group12.project.Services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,7 +60,7 @@ public class FuelQuoteServiceTests {
             );
 
         Mockito.when(repo.findByUsername(fuelQuote.getUsername()))
-            .thenReturn(null);
+            .thenReturn(new ArrayList<>());
 
         MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class);
         pricingModule.when(() -> PricingModule.calculateRate(fuelQuote, false))

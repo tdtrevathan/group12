@@ -25,11 +25,11 @@ public class LoginService {
         return true;
     }
 
-    public loginView create(loginView login){
+    public loginView create(loginView login) throws Exception {
         if(login == null) return null;
-
-        if(repo.findByUsername(login.getUsername()) != null) return null;
-        
+        if(repo.findByUsername(login.getUsername()) != null) {
+            return new loginView("invalid", "Errorp@55");
+        }
         return repo.insert(login);
     }
 }

@@ -1,5 +1,4 @@
 package group12.project.Views;
-import java.util.Date;
 
 import lombok.Data;
 
@@ -44,7 +43,6 @@ public class fuelQuoteView {
     
     private boolean isGallonsValid(String inputGallons){
         if(inputGallons.length() == 0 || inputGallons.startsWith("-") || inputGallons.equals("0")) return false;
-        /*check if gallons is greater than 0 */
         return true;
     }
     private boolean isDateValid(String inputDate){

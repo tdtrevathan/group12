@@ -30,13 +30,10 @@ public class LoginController {
         body.put("username", validate);
 
         return new ResponseEntity<>(body, HttpStatus.OK);
-        
     }
 
     @PostMapping("/signup")
     public loginView createLogin(@RequestBody loginView entity) throws Exception {
-
         return loginService.create(entity);
-
     }
 }

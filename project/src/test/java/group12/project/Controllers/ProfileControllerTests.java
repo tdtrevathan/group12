@@ -1,9 +1,6 @@
 package group12.project.Controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,10 +8,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import group12.project.Controllers.ProfileController;
 import group12.project.Repos.profileRepo;
-import group12.project.Views.profileView;
 import group12.project.Services.ProfileService;
+import group12.project.Views.profileView;
 
 @SpringBootTest
 class ProfileControllerTests {

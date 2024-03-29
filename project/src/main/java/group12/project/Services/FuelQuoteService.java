@@ -1,6 +1,6 @@
 package group12.project.Services;
 
-import java.util.*;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class FuelQuoteService {
 
         List<fuelQuoteView> quoteHistory = repo.findByUsername(fuelQuote.getUsername());   
 
-        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory != null ? true : false);
+        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory.size() > 0 ? true : false);
         Double total = PricingModule.calculateTotal(rate, fuelQuote.getGallons());
 
         return new fuelQuoteView(
@@ -41,7 +41,6 @@ public class FuelQuoteService {
 
     public fuelQuoteView insert(fuelQuoteView fuelQuote) {
         if(fuelQuote == null) return null;
-
         return repo.insert(fuelQuote);
     }
 
