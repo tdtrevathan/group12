@@ -11,7 +11,7 @@ import group12.project.Views.fuelQuoteView;
 
 @SpringBootTest
 
-public class fuelQuoteTest {
+public class fuelQuoteViewTests {
     @Test
 	public void createFuelQuoteView_valuesAreSetCorrectly() throws Exception{
 		fuelQuoteView fuelQuote = new fuelQuoteView(
