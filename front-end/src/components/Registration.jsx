@@ -111,17 +111,32 @@ export default function Registration () {
         setErrorClass(validationErrorClass)
         
         if(Object.keys(validationErrors).length === 0){
-            const response = await fetch('/api/login/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+            try {
+                await fetch('/api/login/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                }).then(response => {
+                    if(!response.ok) {
+                        throw new Error('Connection failed');
+                    }
+                    return response.json()
+                })
+                .then(data => {
+                    if(data.username == "invalid") {
+                        setErrors({username: 'ERROR: Username already taken'})
+                        setErrorClass({username: 'error'})
+                        throw new Error("Username already taken");
+                    }
+                    alert("User successfully registered");
+                    navigate("/")
+                });
 
-            if(response.ok) {
-                alert("User successfully registered");
-                navigate("/")
+
+            } catch (error) {
+                console.log(error);
             }
         }
     }

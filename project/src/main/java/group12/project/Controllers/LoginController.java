@@ -33,7 +33,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public loginView createLogin(@RequestBody loginView entity) {
+    public loginView createLogin(@RequestBody loginView entity) throws Exception {
         return loginService.create(entity);
     }
 }
