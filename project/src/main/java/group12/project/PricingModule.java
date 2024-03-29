@@ -1,7 +1,5 @@
 package group12.project;
 
-import java.util.List;
-
 import group12.project.Views.fuelQuoteView;
 
 public class PricingModule {
