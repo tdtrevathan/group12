@@ -37,8 +37,8 @@ public class FuelQuoteServiceTests {
         quoteHistory.add(new fuelQuoteView("Admin", "5.00", "1234 Not Real Blvd", "11-23-1965", "0.55", "250.00"));
         quoteHistory.add(new fuelQuoteView("Admin", "2.00", "88 Main Street", "04-12-2001", "2.00", "4.00"));  
 
-        // Mockito.when(repo.findByUsername(username))
-        //     .thenReturn(quoteHistory);
+        Mockito.when(repo.findByUsername(username))
+            .thenReturn(quoteHistory);
 
         var result = fuelQuoteService.getHistory(username);
 
@@ -86,8 +86,8 @@ public class FuelQuoteServiceTests {
             "1708.29"
             );
 
-        // Mockito.when(repo.insert(fuelQuote))
-        //     .thenReturn(fuelQuote);
+        Mockito.when(repo.insert(fuelQuote))
+            .thenReturn(fuelQuote);
 
         var result = fuelQuoteService.insert(fuelQuote);
 
