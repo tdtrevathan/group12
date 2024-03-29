@@ -28,7 +28,7 @@ public class FuelQuoteServiceTests {
     private fuelQuoteRepo repo;
 
     @Test
-    public void getHistory_returnsData() {
+    public void getHistory_returnsData() throws Exception {
 
         String username = "Admin";
 
@@ -47,7 +47,7 @@ public class FuelQuoteServiceTests {
     }
 
     @Test
-    public void getQuoteWithRateTotal_ShouldReturnQuote() {
+    public void getQuoteWithRateTotal_ShouldReturnQuote() throws Exception {
 
         fuelQuoteView fuelQuote = new fuelQuoteView(
             "Admin",
@@ -75,7 +75,7 @@ public class FuelQuoteServiceTests {
     }
 
     @Test
-    public void insert_shouldReturnQuote() {
+    public void insert_shouldReturnQuote() throws Exception {
         
         fuelQuoteView fuelQuote = new fuelQuoteView(
             "Admin",
