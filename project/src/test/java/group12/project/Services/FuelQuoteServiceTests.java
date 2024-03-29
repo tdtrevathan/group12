@@ -59,7 +59,7 @@ public class FuelQuoteServiceTests {
             );
 
         try (MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class)) {
-            pricingModule.when(() -> PricingModule.calculateRate(fuelQuote))
+            pricingModule.when(() -> PricingModule.calculateRate(fuelQuote, true))
                 .thenReturn(1.71);
         }
 
