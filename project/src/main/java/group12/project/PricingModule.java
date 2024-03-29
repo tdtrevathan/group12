@@ -4,7 +4,7 @@ import group12.project.Views.fuelQuoteView;
 
 public class PricingModule {
 
-    public static Double calculateRate(fuelQuoteView fuelQuote, Boolean history) {
+    public Double calculateRate(fuelQuoteView fuelQuote, Boolean history) {
 
         String address = fuelQuote.getAddress();
         String state = address.substring(address.length() - 8, address.length() - 6);
@@ -21,7 +21,7 @@ public class PricingModule {
         return Math.round(rate * 100.00) / 100.00;
     }
 
-    public static Double calculateTotal(Double rate, String gallons) {
+    public Double calculateTotal(Double rate, String gallons) {
         return rate * Double.parseDouble(gallons);
     }
 

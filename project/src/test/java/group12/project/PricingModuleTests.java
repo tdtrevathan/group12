@@ -10,6 +10,8 @@ import group12.project.Views.fuelQuoteView;
 @SpringBootTest
 public class PricingModuleTests {
     
+    PricingModule pricingModule = new PricingModule();
+
     @Test
     public void calculateRate_InState_NoHistory_LessThanOrEqual1000Gallons() throws Exception {
 
@@ -22,7 +24,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, false);
+        var result = pricingModule.calculateRate(fuelQuote, false);
 
         assertEquals(1.73, result);
 
@@ -40,7 +42,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, true);
+        var result = pricingModule.calculateRate(fuelQuote, true);
 
         assertEquals(1.71, result);
 
@@ -58,7 +60,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, false);
+        var result = pricingModule.calculateRate(fuelQuote, false);
 
         assertEquals(1.71, result);
 
@@ -76,7 +78,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, true);
+        var result = pricingModule.calculateRate(fuelQuote, true);
 
         assertEquals(1.7, result);
 
@@ -94,7 +96,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, false);
+        var result = pricingModule.calculateRate(fuelQuote, false);
 
         assertEquals(1.76, result);
 
@@ -112,7 +114,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, true);
+        var result = pricingModule.calculateRate(fuelQuote, true);
 
         assertEquals(1.74, result);
 
@@ -130,7 +132,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, false);
+        var result = pricingModule.calculateRate(fuelQuote, false);
 
         assertEquals(1.74, result);
 
@@ -148,7 +150,7 @@ public class PricingModuleTests {
             ""
         );
 
-        var result = PricingModule.calculateRate(fuelQuote, true);
+        var result = pricingModule.calculateRate(fuelQuote, true);
 
         assertEquals(1.73, result);
 

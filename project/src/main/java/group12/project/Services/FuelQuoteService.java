@@ -14,7 +14,8 @@ public class FuelQuoteService {
 
     @Autowired
     private fuelQuoteRepo repo;
-
+    PricingModule pricingModule = new PricingModule();
+    
     public List<fuelQuoteView> getHistory(String username) throws Exception {
 
         List<fuelQuoteView> quoteHistory = repo.findByUsername(username);    
@@ -26,8 +27,8 @@ public class FuelQuoteService {
 
         List<fuelQuoteView> quoteHistory = repo.findByUsername(fuelQuote.getUsername());   
 
-        Double rate = PricingModule.calculateRate(fuelQuote, quoteHistory.size() > 0 ? true : false);
-        Double total = PricingModule.calculateTotal(rate, fuelQuote.getGallons());
+        Double rate = pricingModule.calculateRate(fuelQuote, quoteHistory.size() > 0 ? true : false);
+        Double total = pricingModule.calculateTotal(rate, fuelQuote.getGallons());
 
         return new fuelQuoteView(
             fuelQuote.getUsername(),

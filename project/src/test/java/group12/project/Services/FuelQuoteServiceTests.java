@@ -26,6 +26,9 @@ public class FuelQuoteServiceTests {
     FuelQuoteService fuelQuoteService;
 
     @Mock
+    PricingModule pricingModule = new PricingModule();
+
+    @Mock
     private fuelQuoteRepo repo;
 
     @Test
@@ -62,11 +65,11 @@ public class FuelQuoteServiceTests {
         Mockito.when(repo.findByUsername(fuelQuote.getUsername()))
             .thenReturn(new ArrayList<>());
 
-        MockedStatic<PricingModule> pricingModule = Mockito.mockStatic(PricingModule.class);
-        pricingModule.when(() -> PricingModule.calculateRate(fuelQuote, false))
+
+        Mockito.when(pricingModule.calculateRate(fuelQuote, false))
             .thenReturn(1.71);
 
-        pricingModule.when(() -> PricingModule.calculateTotal(1.71, fuelQuote.getGallons()))
+        Mockito.when(pricingModule.calculateTotal(1.71, fuelQuote.getGallons()))
             .thenReturn(1708.29);
 
         var result = fuelQuoteService.getQuoteWithRateTotal(fuelQuote);
