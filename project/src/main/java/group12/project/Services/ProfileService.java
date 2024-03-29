@@ -29,8 +29,7 @@ public class ProfileService {
     public profileView upsert(profileView profile){
         if(profile == null) return null;
 
-
-        var result = repo.findByUsername(profile.getUsername());
+        profileView result = repo.findByUsername(profile.getUsername());
 
         if(result != null){
             result.setUsername(profile.getUsername());  
@@ -42,9 +41,6 @@ public class ProfileService {
             result.setZipcode(profile.getZipcode());
 
             return repo.save(result);
-        }
-        else{
-            return repo.insert(profile);
         }
     }
 }
