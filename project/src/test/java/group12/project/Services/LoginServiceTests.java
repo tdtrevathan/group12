@@ -31,8 +31,8 @@ class LoginServiceTests {
             "P@ssw0rd"
         );
 
-        // Mockito.when(repo.findByUsername(login.getUsername()))
-        //     .thenReturn(login);
+        Mockito.when(repo.findByUsername(login.getUsername()))
+            .thenReturn(login);
 
         var result = service.validateLogin(login);
         assertEquals(true, result);
@@ -52,8 +52,8 @@ class LoginServiceTests {
             "F@1lurePassword"
         );
 
-        // Mockito.when(repo.findByUsername(login.getUsername()))
-        //     .thenReturn(login);
+        Mockito.when(repo.findByUsername(login.getUsername()))
+            .thenReturn(login);
 
         var result = service.validateLogin(badLogin);
         assertEquals(false, result);

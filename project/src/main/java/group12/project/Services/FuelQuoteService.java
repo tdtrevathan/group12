@@ -17,12 +17,7 @@ public class FuelQuoteService {
 
     public List<fuelQuoteView> getHistory(String username) throws Exception {
 
-        // List<fuelQuoteView> quoteHistory = repo.findByUsername(username);
-
-        List<fuelQuoteView> quoteHistory = new ArrayList<>();
-        quoteHistory.add(new fuelQuoteView("Admin", "1.00", "333 Fake Address Avenue", "01-05-2020", "3.55", "100.00"));
-        quoteHistory.add(new fuelQuoteView("Admin", "5.00", "1234 Not Real Blvd", "11-23-1965", "0.55", "250.00"));
-        quoteHistory.add(new fuelQuoteView("Admin", "2.00", "88 Main Street", "04-12-2001", "2.00", "4.00"));      
+        List<fuelQuoteView> quoteHistory = repo.findByUsername(username);    
 
         return quoteHistory;
     }
@@ -45,8 +40,7 @@ public class FuelQuoteService {
     public fuelQuoteView insert(fuelQuoteView fuelQuote) {
         if(fuelQuote == null) return null;
 
-        // return repo.insert(fuelQuote);
-        return fuelQuote;
+        return repo.insert(fuelQuote);
     }
 
     

@@ -13,12 +13,7 @@ public class LoginService {
 
     public Boolean validateLogin(loginView login) throws Exception {
 
-        // var result = repo.findByUsername(login.getUsername()); //Database option
-
-        loginView result = new loginView(
-            "Admin",
-            "P@ssw0rd"
-        );
+        var result = repo.findByUsername(login.getUsername());
 
         var resultPass = result.getPassword();
         var loginPass = login.getPassword();
@@ -33,7 +28,7 @@ public class LoginService {
     public loginView create(loginView login){
         if(login == null) return null;
 
-        //Add database option to check if username already exists
+        if(repo.findByUsername(login.getUsername()) != null) return null;
         
         return repo.insert(login);
     }
