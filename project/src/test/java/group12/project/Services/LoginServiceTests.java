@@ -9,9 +9,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import group12.project.Repos.loginRepo;
 import group12.project.Views.loginView;
+import group12.project.Views.loginViewEncrypted;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -31,12 +33,28 @@ class LoginServiceTests {
             "P@ssw0rd"
         );
 
+        loginViewEncrypted encryptedLogin = new loginViewEncrypted(login.getUsername(), login.getPassword());
+        encryptedLogin.encryptPassword();
+
         Mockito.when(repo.findByUsername(login.getUsername()))
-            .thenReturn(login);
+            .thenReturn(encryptedLogin);
 
         var result = service.validateLogin(login);
         assertEquals(true, result);
+    }
 
+    @Test
+    public void validateLogin_Successasdafds() throws Exception{
+
+        String password = "stsdt2213s";
+
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+
+        var test1 = bc.encode(password);
+        var test2 = bc.encode(password);
+
+        assertTrue(bc.matches(password, test1));
+        assertTrue(bc.matches(password, test2));
     }
 
     @Test
@@ -52,8 +70,10 @@ class LoginServiceTests {
             "F@1lurePassword"
         );
 
+        loginViewEncrypted encryptedLogin = new loginViewEncrypted(login.getUsername(), login.getPassword());
+
         Mockito.when(repo.findByUsername(login.getUsername()))
-            .thenReturn(login);
+            .thenReturn(encryptedLogin);
 
         var result = service.validateLogin(badLogin);
         assertEquals(false, result);
@@ -68,11 +88,7 @@ class LoginServiceTests {
             "P@ssw0rd"
         );
 
-        Mockito.when(repo.insert(login))
-            .thenReturn(login);
-
         var result = service.create(login);
         assertEquals(login, result);
-
     }
 }
