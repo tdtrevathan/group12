@@ -16,6 +16,6 @@ export default function Nav ( {loggedInUsername} ) {
                 ''
             }
 
-        </nav> /* TODO nav only shows after login, login and register should be removed at certain point*/
+        </nav>
     )
 }
