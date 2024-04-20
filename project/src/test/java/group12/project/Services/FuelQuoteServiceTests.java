@@ -9,12 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import group12.project.PricingModule;
 import group12.project.Repos.fuelQuoteRepo;
 import group12.project.Views.fuelQuoteView;
 
@@ -24,9 +22,6 @@ public class FuelQuoteServiceTests {
     
     @InjectMocks
     FuelQuoteService fuelQuoteService;
-
-    @Mock
-    PricingModule pricingModule = new PricingModule();
 
     @Mock
     private fuelQuoteRepo repo;
@@ -64,13 +59,6 @@ public class FuelQuoteServiceTests {
 
         Mockito.when(repo.findByUsername(fuelQuote.getUsername()))
             .thenReturn(new ArrayList<>());
-
-
-        Mockito.when(pricingModule.calculateRate(fuelQuote, false))
-            .thenReturn(1.71);
-
-        Mockito.when(pricingModule.calculateTotal(1.71, fuelQuote.getGallons()))
-            .thenReturn(1708.29);
 
         var result = fuelQuoteService.getQuoteWithRateTotal(fuelQuote);
 
