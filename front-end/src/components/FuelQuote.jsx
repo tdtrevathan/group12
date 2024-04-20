@@ -6,6 +6,22 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
     
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const confirmationMessage = 'Are you sure you want to leave? Your current quote will be discarded.';
+
+        const handleBeforeUnload = (e) => {
+            e.preventDefault();
+            e.returnValue = confirmationMessage;
+            return confirmationMessage;
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
     const [confirmation, setConfirmation] = useState()
     const [error, setError] = useState(null);
     const [errors, setErrors] = useState({})
