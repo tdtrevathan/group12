@@ -155,7 +155,7 @@ export default function Registration () {
     return (
         <form id="register" onSubmit={handleSubmit}>
             <Input name='username' label='Username: *' type='text' className={errorClass.username} handleChange={handleChange}></Input>
-            {errors.username && <span class='error'>{errors.username}</span>}
+            {errors.username && <span className='error'>{errors.username}</span>}
             <Input name='password' label='Password: *' type='password' className={errorClass.password} handleChange={handleChange}></Input>
             <div id="passwordRequirements">
                 <p id="passwordLength">Must be between 8 and 50 characters.</p>
@@ -164,7 +164,7 @@ export default function Registration () {
                 <p id="passwordUppercase">Must contain at least one uppercase letter.</p>
             </div>
             <Input name='checkPassword' label='Re-enter Password: *' type='password' className={errorClass.checkPassword} handleChange={handleChange}></Input>
-            {/* {errors.checkPassword && <span class='error'>{errors.checkPassword}</span>} */}
+            {/* {errors.checkPassword && <span className='error'>{errors.checkPassword}</span>} */}
             <div id="passwordRequirements">
                 <p id="passwordMatch">Passwords don't match</p>
             </div>
