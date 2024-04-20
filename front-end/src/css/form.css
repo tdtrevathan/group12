@@ -7,6 +7,7 @@ form label {
     color: #FF9F06;
     display: block;
     font-size: 14px;
+    cursor: text;
 }
 
 form input {
@@ -17,6 +18,11 @@ form input {
     font-size: 18px;
     margin-bottom: 20px;
     color: #7F2714;
+}
+
+form input::placeholder {
+    font-weight: normal;
+    opacity: 1;
 }
 
 form .username {
@@ -36,6 +42,24 @@ form .username {
 form input:focus {
     outline: none;
     border-color: #FF9F06;
+    color:#7F2714;
+}
+
+form input.readonly {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: default;
+    font-weight: bold;
+}
+
+form input.readonly:focus {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: default;
+}
+
+form input.money::before {
+    content: '$';
     color:#7F2714;
 }
 
@@ -98,12 +122,29 @@ form button {
     cursor: pointer;
     font-size: 18px;
     line-height: 26px;
+    margin-bottom: 20px;
 }
 
 form button.outline {
     background-color: transparent;
     color:#7F2714;
     margin-right: 2%;
+}
+
+form button.big {
+    width: 100%;
+    max-width: 600px;
+}
+
+form button.disabled {
+    background-color: #bbbbbb;
+    border-color: #bbbbbb;
+}
+
+form button.disabled:hover {
+    background-color: #bbbbbb;
+    border-color: #bbbbbb;
+    cursor: default;
 }
 
 form button:hover {
