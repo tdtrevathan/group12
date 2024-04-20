@@ -1,7 +1,7 @@
 import '../css/table.css'
 
 export function Table ({headers, rows}){
-    console.log(headers);
+    
     return (
         <>
         <table>

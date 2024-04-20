@@ -158,7 +158,6 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             zipcode[0].value = data.zipcode;
 
             var address2String = data.address2 != null ? data.address2 + " " : "";
-            console.log(data.address1)
             if(data.address1) {
                 setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
             }
@@ -186,29 +185,29 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         <form onSubmit={handleSubmit}>
             
             <label>Username:</label>
-            <div class="username">{loggedInUsername}</div>
+            <div className="username">{loggedInUsername}</div>
             <Input name='fullName' label='Full Name: *' type='text' className={errorClass.fullName} handleChange={handleChange}></Input>
-            {errors.fullName && <span class='error'>{errors.fullName}</span>}
+            {errors.fullName && <span className='error'>{errors.fullName}</span>}
             
             <Input name='address1' label='Address 1: *' type='text' className={errorClass.address1} handleChange={handleChange}></Input>
-            {errors.address1 && <span class='error'>{errors.address1}</span>}
+            {errors.address1 && <span className='error'>{errors.address1}</span>}
             
             <Input name='address2' label='Address 2:' type='text' className={errorClass.address2} handleChange={handleChange}></Input>
             
-            {errors.address2 && <span class='error'>{errors.address2}</span>}
+            {errors.address2 && <span className='error'>{errors.address2}</span>}
             <div id="cityStateGrid">
                 <div id="cityContainer">
                     <Input name='city' label='City: *' type='text' className={errorClass.city} handleChange={handleChange}></Input>
-                    {errors.city && <span class='error'>{errors.city}</span>}
+                    {errors.city && <span className='error'>{errors.city}</span>}
                 </div>
                 <div id="stateContainer">
                     <Select name='state' label='State: *' codes={states} className={errorClass.state} handleChange={handleChange}></Select>
-                    {errors.state && <span class='error'>{errors.state}</span>}
+                    {errors.state && <span className='error'>{errors.state}</span>}
                 </div>
             </div>
             
             <Input name='zipcode' label='Zipcode: *' type='text' className={errorClass.zipcode} handleChange={handleChange}></Input>
-            {errors.zipcode && <span class='error'>{errors.zipcode}</span>}
+            {errors.zipcode && <span className='error'>{errors.zipcode}</span>}
 
             <Button name='submitButton' type='submit' buttonText='Save'></Button>
         </form>

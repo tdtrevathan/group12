@@ -27,13 +27,10 @@ export default function QuoteHistory ( {loggedInUsername} ) {
             return response.json()
         })
         .then(data => {
-           console.log(data) 
            var quotes = [];
            for(var i = 0; i < data.length; i++) {
-            console.log(data[i]);
             quotes.push(data[i]);
            }
-           console.log(quotes)
            setQuoteHistory(quotes);
         });
 
