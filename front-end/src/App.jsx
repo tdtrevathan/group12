@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, Routes, RouterProvider } from "react-router-dom";
 
 import { useState } from "react";
 import Container from "./components/Container";
@@ -13,9 +13,8 @@ export default function App() {
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const [loggedInAddress, setLoggedInAddress] = useState('');
 
-  return (
-    <BrowserRouter>
-      <Routes>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
         <Route path="" element={
             <Container 
               loggedInUsername={loggedInUsername}
@@ -28,7 +27,10 @@ export default function App() {
           <Route path="/fuelquote" element={<FuelQuote loggedInUsername={loggedInUsername} loggedInAddress={loggedInAddress}/>} />
           <Route path="/quotehistory" element={<QuoteHistory loggedInUsername={loggedInUsername}/>} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+    )
+  );
+
+  return (
+    <RouterProvider router={router} />
   )
 }

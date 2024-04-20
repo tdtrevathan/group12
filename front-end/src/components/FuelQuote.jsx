@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Button, Input, Label } from './FormFields';
+import { useNavigate, useBlocker } from "react-router-dom";
+import { Button, Input } from './FormFields';
 
 export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
     
     const navigate = useNavigate();
 
+    const [unsubmittedQuote, setUnsubmittedQuote] = useState(false);
+    let blocker = useBlocker(unsubmittedQuote);
+
     useEffect(() => {
         const confirmationMessage = 'Are you sure you want to leave? Your current quote will be discarded.';
 
-        const handleBeforeUnload = (e) => {
-            e.preventDefault();
-            e.returnValue = confirmationMessage;
-            return confirmationMessage;
-        };
+        if(blocker.state === "blocked") {
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
+            if(window.confirm(confirmationMessage)) {
+                blocker.proceed();
+                blocker.reset();
+            }
+        }
 
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, []);
+    }, [blocker]);
 
     const [confirmation, setConfirmation] = useState()
     const [error, setError] = useState(null);
@@ -56,8 +56,8 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
         setConfirmation('');
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    async function fetchQuote() {
+
         const validationErrors = {}
         const validationErrorClass = {}
 
@@ -100,8 +100,6 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                     return data;
                 })
                 setError('');
-                // setRate((Math.round(responseBody.rate * 100) / 100).toFixed(2));
-                // settotalPrice((Math.round(responseBody.total * 100) / 100).toFixed(2));
                 setConfirmation('');
 
                 
@@ -114,12 +112,45 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                 document.getElementById("total").value = tempForm.total;
 
                 setFormData({...tempForm});
+                setUnsubmittedQuote(true);
 
 
             } catch (error) {
                 setError(error.message);
             }
 
+        }
+    }
+
+    async function confirmQuote() {
+        console.log(formData);
+        try {
+            const response = await fetch('/api/fuelQuote/submitQuote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if(!response.ok) {
+                throw new Error('Failed to submit quote');
+            }
+
+            setConfirmation(`Quote for ${formData.gallons} gallons on ${formData.date} with a total of ${formData.total} submited successfully.`);
+            
+            var tempForm = formData;
+            tempForm.rate = '';
+            tempForm.total = '';
+            setFormData({...tempForm});
+
+            setUnsubmittedQuote(false);
+            if(blocker.state === "blocked") {
+                blocker.reset();
+            }
+
+        } catch (error) {
+            setError(error.message);
         }
     }
 
@@ -141,32 +172,9 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
         document.getElementById("date").value = '';
         document.getElementById("rate").value = '';
         document.getElementById("total").value = '';
-    }
-
-    async function confirmQuote() {
-        console.log(formData);
-        try {
-            const response = await fetch('/api/fuelQuote/submitQuote', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if(!response.ok) {
-                throw new Error('Failed to submit quote');
-            }
-
-            setConfirmation(`Quote for ${formData.gallons} gallons on ${formData.date} with a total of $${formData.total} submited successfully.`);
-            
-            var tempForm = formData;
-            tempForm.rate = '';
-            tempForm.total = '';
-            setFormData({...tempForm});
-
-        } catch (error) {
-            setError(error.message);
+        setUnsubmittedQuote(false);
+        if(blocker.state === "blocked") {
+            blocker.reset();
         }
     }
 
@@ -174,30 +182,30 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
         if(!loggedInUsername) {
             navigate('/')
         }
-        console.log(loggedInAddress);
+        if(blocker.state === "blocked") {
+            blocker.reset();
+        }
       }, []);
 
     return (
         <>
-        <form id="fuelQuoteForm" onSubmit={handleSubmit}>
+        <form id="fuelQuoteForm">
 
             <Input name='gallons' label='Gallons: *' type='number' className={errorClass.gallons} handleChange={handleChange}></Input>
-            {errors.gallons && <span class='error'>{errors.gallons}</span>}
+            {errors.gallons && <span className='error'>{errors.gallons}</span>}
 
-            {/* <Label name='address' label='Address:'></Label>
-            <span className="filledData" name='address'>{loggedInAddress}</span> */}
             <Input 
                 name="address"
                 label="Address:"
                 type="text"
                 value={loggedInAddress}
                 className='readonly'
-                readOnly='true'
+                readOnly
             >
             </Input>
 
             <Input name='date' label='Delivery Date: *' type='date' className={errorClass.date} handleChange={handleChange}></Input>
-            {errors.date && <span class='error'>{errors.date}</span>}
+            {errors.date && <span className='error'>{errors.date}</span>}
 
             <Input 
                 name='rate'
@@ -206,7 +214,7 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                 placeholder='$0.00'
                 className={'readonly money'}
                 handleChange={handleChange}
-                readOnly={'true'}></Input>
+                readOnly></Input>
 
             <Input
                 name='total'
@@ -215,15 +223,16 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                 placeholder='$0.00'
                 className={'readonly money'}
                 handleChange={handleChange}
-                readOnly={'true'}></Input>
+                readOnly></Input>
 
-            <Button name='submitButton' type='button' buttonText='Reset' className={'outline'} onClick={resetForm}></Button>
+            <Button name='resetButton' type='button' buttonText='Reset' className={'outline'} onClick={resetForm}></Button>
 
             <Button 
-                name='submitButton'
-                type={!(formData.address && formData.gallons && formData.date) ? 'button' : 'submit'}
+                name='quoteButton'
+                type='button'
                 buttonText='Get Quote'
                 className={!(formData.address && formData.gallons && formData.date) ? 'disabled' : ''}
+                onClick={(formData.address && formData.gallons && formData.date) ? fetchQuote : () => {}}
             >
             </Button>
 
@@ -232,13 +241,13 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                 type='button'
                 buttonText='Submit Quote'
                 className={formData.total ? 'big' : 'big disabled'}
-                onClick={formData.total ? confirmQuote : ''}
+                onClick={formData.total ? confirmQuote : () => {}}
             >
             </Button>
         
         </form>
         {confirmation && <span className="confirm">{confirmation}</span>}
-        {error && <span className="error">{error}</span>}
+        {error && <span className="error">{error}</span>}        
         </>
     )
 }

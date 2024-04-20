@@ -21,7 +21,7 @@ export function Input ( { name, label, type, value, placeholder, className, hand
     return (
         <>
         <Label name={name} label={label} />
-        <input id={name} name={name} type={type} value={value} placeholder={placeholder} className={className} onChange={handleChange} readonly={readOnly}/>
+        <input id={name} name={name} type={type} value={value} placeholder={placeholder} className={className} onChange={handleChange} readOnly={readOnly}/>
         </>
     )
 }
