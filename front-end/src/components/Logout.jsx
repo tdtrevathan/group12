@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Logout( {loggedInUsername, setLoggedInUsername} ) {
+export default function Logout( {loggedInUsername, setLoggedInUsername, setLoggedInAddress} ) {
 
     const navigate = useNavigate();
 
     function logout() {
         setLoggedInUsername('')
+        setLoggedInAddress('')
         localStorage.removeItem("username");
         navigate('/')
     }

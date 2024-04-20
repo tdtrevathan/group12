@@ -113,7 +113,9 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
                  }).then(data => {
                     console.log(data);
                     var address2String = data.address2 != null ? data.address2 + " " : "";
-                    setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+                    if(data.address1) {
+                        setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+                    }
                  });
                  
                  //To show that post works
@@ -156,7 +158,10 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             zipcode[0].value = data.zipcode;
 
             var address2String = data.address2 != null ? data.address2 + " " : "";
-            setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+            console.log(data.address1)
+            if(data.address1) {
+                setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+            }
 
         })
         .catch(e => {

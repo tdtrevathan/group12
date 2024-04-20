@@ -16,7 +16,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Container loggedInUsername={loggedInUsername} setLoggedInUsername={setLoggedInUsername}/>}>
+        <Route path="" element={
+            <Container 
+              loggedInUsername={loggedInUsername}
+              setLoggedInUsername={setLoggedInUsername}
+              setLoggedInAddress={setLoggedInAddress}/>
+        }>
           <Route index path="/" element={<Login setLoggedInUsername={setLoggedInUsername}/>} />
           <Route path="/register" element={<Registration />} />
           <Route path="/profile" element={<Profile loggedInUsername={loggedInUsername} setLoggedInAddress={setLoggedInAddress}/>} />

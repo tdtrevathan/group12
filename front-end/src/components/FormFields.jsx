@@ -16,12 +16,12 @@ export function Button ( { buttonText, name, type, className, onClick } ) {
     )
 }
 
-export function Input ( { name, label, type, className, handleChange } ) {
+export function Input ( { name, label, type, value, placeholder, className, handleChange, readOnly} ) {
 
     return (
         <>
         <Label name={name} label={label} />
-        <input id={name} name={name} type={type} className={className} onChange={handleChange} />
+        <input id={name} name={name} type={type} value={value} placeholder={placeholder} className={className} onChange={handleChange} readonly={readOnly}/>
         </>
     )
 }

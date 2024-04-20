@@ -26,8 +26,7 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
     const [error, setError] = useState(null);
     const [errors, setErrors] = useState({})
     const [errorClass, setErrorClass] = useState({})
-    const [rate, setRate] = useState(0);
-    const [totalPrice, settotalPrice] = useState(0);
+    
     const [formData, setFormData] = useState({
         username: loggedInUsername,
         address: loggedInAddress,
@@ -43,11 +42,17 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
         errors[name] = '';
         errorClass[name] = '';
 
+        var tempForm = formData;
+
+        tempForm.rate = '';
+        document.getElementById("rate").value = '';
+        tempForm.total = '';
+        document.getElementById("total").value = '';
+
         setFormData({
-            ...formData, [name] : value
+            ...tempForm, [name] : value
         })
-        setRate(0);
-        settotalPrice(0);
+        
         setConfirmation('');
     }
 
@@ -95,16 +100,21 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                     return data;
                 })
                 setError('');
-                setRate((Math.round(responseBody.rate * 100) / 100).toFixed(2));
-                settotalPrice((Math.round(responseBody.total * 100) / 100).toFixed(2));
+                // setRate((Math.round(responseBody.rate * 100) / 100).toFixed(2));
+                // settotalPrice((Math.round(responseBody.total * 100) / 100).toFixed(2));
                 setConfirmation('');
+
                 
                 var tempForm = formData;
-                tempForm.rate = responseBody.rate.toString();;
-                console.log(responseBody.total)
-                tempForm.total = responseBody.total.toString();;
-                console.log(tempForm)
-                setFormData(tempForm);
+
+                tempForm.rate = '$' + (Math.round(responseBody.rate * 100) / 100).toFixed(2);
+                document.getElementById("rate").value = tempForm.rate;
+
+                tempForm.total = '$' + (Math.round(responseBody.total * 100) / 100).toFixed(2);
+                document.getElementById("total").value = tempForm.total;
+
+                setFormData({...tempForm});
+
 
             } catch (error) {
                 setError(error.message);
@@ -114,8 +124,7 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
     }
 
     function resetForm() {
-        setRate(0)
-        settotalPrice(0);
+        
         var temp = {
             username: loggedInUsername,
             address: loggedInAddress,
@@ -124,12 +133,14 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
             rate: '',
             total: ''
         }
-        setFormData(temp);
+        setFormData({...temp});
         setError('');
         setErrors({});
         setErrorClass({});
         document.getElementById("gallons").value = '';
         document.getElementById("date").value = '';
+        document.getElementById("rate").value = '';
+        document.getElementById("total").value = '';
     }
 
     async function confirmQuote() {
@@ -148,7 +159,11 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
             }
 
             setConfirmation(`Quote for ${formData.gallons} gallons on ${formData.date} with a total of $${formData.total} submited successfully.`);
-            // resetForm();
+            
+            var tempForm = formData;
+            tempForm.rate = '';
+            tempForm.total = '';
+            setFormData({...tempForm});
 
         } catch (error) {
             setError(error.message);
@@ -159,6 +174,7 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
         if(!loggedInUsername) {
             navigate('/')
         }
+        console.log(loggedInAddress);
       }, []);
 
     return (
@@ -168,38 +184,57 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
             <Input name='gallons' label='Gallons: *' type='number' className={errorClass.gallons} handleChange={handleChange}></Input>
             {errors.gallons && <span class='error'>{errors.gallons}</span>}
 
-            <Label name='address' label='Address:'></Label>
-            <span className="filledData" name='address'>{loggedInAddress}</span>
+            {/* <Label name='address' label='Address:'></Label>
+            <span className="filledData" name='address'>{loggedInAddress}</span> */}
+            <Input 
+                name="address"
+                label="Address:"
+                type="text"
+                value={loggedInAddress}
+                className='readonly'
+                readOnly='true'
+            >
+            </Input>
 
             <Input name='date' label='Delivery Date: *' type='date' className={errorClass.date} handleChange={handleChange}></Input>
             {errors.date && <span class='error'>{errors.date}</span>}
 
-            {rate ?
-                <>
-                <Label name='rate' label='Suggested Price / Gallon:'></Label>
-                <span className="filledData" name='rate'>${rate}</span>
-                </>
-            :
-            ''
-            }
+            <Input 
+                name='rate'
+                label='Suggested Price / Gallon:'
+                type='text'
+                placeholder='$0.00'
+                className={'readonly money'}
+                handleChange={handleChange}
+                readOnly={'true'}></Input>
 
-            
-            {totalPrice ? 
-            <>
-            <Label name='total' label='Ammount Due:'></Label>
-            <span className="filledData">${totalPrice}</span>
-            </> 
-            :
-            ''
-            }
+            <Input
+                name='total'
+                label='Total Amount:'
+                type='text'
+                placeholder='$0.00'
+                className={'readonly money'}
+                handleChange={handleChange}
+                readOnly={'true'}></Input>
 
             <Button name='submitButton' type='button' buttonText='Reset' className={'outline'} onClick={resetForm}></Button>
-            
-            {totalPrice ? 
-            <Button name='submitButton' type='button' buttonText='Confirm' onClick={confirmQuote}></Button>
-            :
-            <Button name='submitButton' type='submit' buttonText='Get Quote'></Button>
-            }
+
+            <Button 
+                name='submitButton'
+                type={!(formData.address && formData.gallons && formData.date) ? 'button' : 'submit'}
+                buttonText='Get Quote'
+                className={!(formData.address && formData.gallons && formData.date) ? 'disabled' : ''}
+            >
+            </Button>
+
+            <Button 
+                name='submitButton'
+                type='button'
+                buttonText='Submit Quote'
+                className={formData.total ? 'big' : 'big disabled'}
+                onClick={formData.total ? confirmQuote : ''}
+            >
+            </Button>
         
         </form>
         {confirmation && <span className="confirm">{confirmation}</span>}
