@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useBlocker } from "react-router-dom";
 import { Button, Input, Select } from './FormFields';
 
 export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
@@ -11,6 +11,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
 
     const [errors, setErrors] = useState({})
     const [errorClass, setErrorClass] = useState({})
+    const [intialFormData, setIntialFormData] = useState({});
     const [formData, setFormData] = useState({
         username: username,
         fullName: "",
@@ -20,6 +21,20 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         state: "",
         zipcode: ""
     })
+
+    let blocker = useBlocker(intialFormData !== formData);
+    useEffect(() => {
+        const confirmationMessage = 'Are you sure you want to leave? You have unsaved changes.';
+
+        if(blocker.state === "blocked") {
+
+            if(window.confirm(confirmationMessage)) {
+                blocker.proceed();
+                blocker.reset();
+            }
+        }
+
+    }, [blocker]);
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -115,7 +130,10 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
                     }
                     return response.json();
                  }).then(data => {
-                    console.log(data);
+                    
+                    setFormData(data);
+                    setIntialFormData(data);
+                    
                     var address2String = data.address2 != null ? data.address2 + " " : "";
                     if(data.address1) {
                         setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
@@ -128,6 +146,31 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         }
     }
 
+    function setForm(data) {
+
+        var tempForm = data;
+        tempForm.username = loggedInUsername;
+        setFormData(tempForm);
+        setIntialFormData(tempForm);
+
+        document.getElementById('fullName').value = data.fullName;
+        document.getElementById('address1').value = data.address1;
+        document.getElementById('address2').value = data.address2;
+        document.getElementById('city').value = data.city;
+        document.getElementById('state').value = data.state;
+        document.getElementById('zipcode').value = data.zipcode;
+
+        var address2String = data.address2 != null ? data.address2 + " " : "";
+        if(data.address1) {
+            setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+        }
+
+        if(blocker.state === "blocked") {
+            blocker.reset();
+        }
+
+    }
+
     async function getProfile(){
 
         return await fetch(`/api/profile/${username}`, {
@@ -135,33 +178,9 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json())
-        .then(data => {
-
-            var tempForm = data;
-            tempForm.username = loggedInUsername;
-            setFormData(tempForm);
-            
-            let fullName = document.getElementsByName('fullName');
-            let address1 = document.getElementsByName('address1');
-            let address2 = document.getElementsByName('address2');
-            let city = document.getElementsByName('city');
-            let state = document.getElementsByName('state');
-            let zipcode = document.getElementsByName('zipcode');
-
-            fullName[0].value = data.fullName;
-            address1[0].value = data.address1;
-            address2[0].value = data.address2;
-            city[0].value = data.city;
-            state[0].value = data.state;
-            zipcode[0].value = data.zipcode;
-
-            var address2String = data.address2 != null ? data.address2 + " " : "";
-            if(data.address1) {
-                setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
-            }
-
         })
+        .then(response => response.json())
+        .then(data => setForm(data))
         .catch(e => {
           console.log(e);
         })
@@ -208,9 +227,11 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             <Input name='zipcode' label='Zipcode: *' type='text' className={errorClass.zipcode} handleChange={handleChange}></Input>
             {errors.zipcode && <span className='error'>{errors.zipcode}</span>}
 
+            <Button name='resetButton' type='button' buttonText='Reset' className={'outline'} onClick={() => setForm(intialFormData)}></Button>
+
             <Button name='submitButton' type='submit' buttonText='Save'></Button>
-            {confirmation && <span className="confirm">{confirmation}</span>}
         </form>
+        {confirmation && <span className="confirm">{confirmation}</span>}
         </>
     )
 }
