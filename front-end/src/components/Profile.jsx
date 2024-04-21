@@ -146,17 +146,24 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         }
     }
 
-    function resetForm() {
+    function setForm(data) {
 
-        var tempForm = intialFormData;
+        var tempForm = data;
+        tempForm.username = loggedInUsername;
         setFormData(tempForm);
+        setIntialFormData(tempForm);
 
-        document.getElementById('fullName').value = tempForm.fullName;
-        document.getElementById('address1').value = tempForm.address1;
-        document.getElementById('address2').value = tempForm.address2;
-        document.getElementById('city').value = tempForm.city;
-        document.getElementById('state').value = tempForm.state;
-        document.getElementById('zipcode').value = tempForm.zipcode;
+        document.getElementById('fullName').value = data.fullName;
+        document.getElementById('address1').value = data.address1;
+        document.getElementById('address2').value = data.address2;
+        document.getElementById('city').value = data.city;
+        document.getElementById('state').value = data.state;
+        document.getElementById('zipcode').value = data.zipcode;
+
+        var address2String = data.address2 != null ? data.address2 + " " : "";
+        if(data.address1) {
+            setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
+        }
 
         if(blocker.state === "blocked") {
             blocker.reset();
@@ -171,27 +178,9 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json())
-        .then(data => {
-
-            var tempForm = data;
-            tempForm.username = loggedInUsername;
-            setFormData(tempForm);
-            setIntialFormData(tempForm);
-
-            document.getElementById('fullName').value = data.fullName;
-            document.getElementById('address1').value = data.address1;
-            document.getElementById('address2').value = data.address2;
-            document.getElementById('city').value = data.city;
-            document.getElementById('state').value = data.state;
-            document.getElementById('zipcode').value = data.zipcode;
-
-            var address2String = data.address2 != null ? data.address2 + " " : "";
-            if(data.address1) {
-                setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
-            }
-
         })
+        .then(response => response.json())
+        .then(data => setForm(data))
         .catch(e => {
           console.log(e);
         })
@@ -238,7 +227,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             <Input name='zipcode' label='Zipcode: *' type='text' className={errorClass.zipcode} handleChange={handleChange}></Input>
             {errors.zipcode && <span className='error'>{errors.zipcode}</span>}
 
-            <Button name='resetButton' type='button' buttonText='Reset' className={'outline'} onClick={resetForm}></Button>
+            <Button name='resetButton' type='button' buttonText='Reset' className={'outline'} onClick={() => setForm(intialFormData)}></Button>
 
             <Button name='submitButton' type='submit' buttonText='Save'></Button>
         </form>
