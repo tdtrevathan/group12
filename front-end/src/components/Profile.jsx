@@ -6,7 +6,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
     
     const navigate = useNavigate();
     const username = loggedInUsername;
-
+    const [confirmation, setConfirmation] = useState()
     const states = ['', 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
     const [errors, setErrors] = useState({})
@@ -30,6 +30,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         setFormData({
             ...formData, [name] : value
         })
+        setConfirmation('');
     }
 
     const handleSubmit = async (e) => {
@@ -109,6 +110,9 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
                         //Handling unsuccessful creation
                         throw new Error('Did not create profile');
                     }
+                    else{
+                        setConfirmation('Saved Successfully')
+                    }
                     return response.json();
                  }).then(data => {
                     console.log(data);
@@ -117,12 +121,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
                         setLoggedInAddress(data.address1 + " " + address2String + data.city + ", " + data.state + " " + data.zipcode)
                     }
                  });
-                 
-                 //To show that post works
-                 console.log(response);
-                 
-                 
-
+                
             } catch (error) {
                 // setError(error.message);
             }
@@ -210,6 +209,7 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
             {errors.zipcode && <span className='error'>{errors.zipcode}</span>}
 
             <Button name='submitButton' type='submit' buttonText='Save'></Button>
+            {confirmation && <span className="confirm">{confirmation}</span>}
         </form>
         </>
     )
