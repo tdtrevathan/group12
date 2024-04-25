@@ -17,7 +17,6 @@ public class LoginService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         var result = repo.findByUsername(login.getUsername());
-        System.out.println(result);
         var resultPass = result.getPassword();
         var loginPass = login.getPassword();
         
