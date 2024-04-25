@@ -201,9 +201,16 @@ export default function Profile ( {loggedInUsername, setLoggedInAddress} ) {
         <>
 
         <form onSubmit={handleSubmit}>
-            
-            <label>Username:</label>
-            <div className="username">{loggedInUsername}</div>
+
+            <Input
+                name='username'
+                label="Username:"
+                type='text'
+                className={'readonly'}
+                value={loggedInUsername}
+                readOnly
+            ></Input>
+
             <Input name='fullName' label='Full Name: *' type='text' className={errorClass.fullName} handleChange={handleChange}></Input>
             {errors.fullName && <span className='error'>{errors.fullName}</span>}
             

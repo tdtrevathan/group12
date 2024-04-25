@@ -130,7 +130,7 @@ export default function Registration () {
                         setErrorClass({username: 'error'})
                         throw new Error("Username already taken");
                     }
-                    alert("User successfully registered");
+                    alert(`${data.username} successfully registered`);
                     navigate("/")
                 });
 
@@ -168,6 +168,7 @@ export default function Registration () {
             <div id="passwordRequirements">
                 <p id="passwordMatch">Passwords don't match</p>
             </div>
+            <Button name='login' className='outline' type='submit' buttonText='Back to Login' onClick={() => navigate('/')}></Button>
             <Button name='submitButton' type='submit' buttonText='Register'></Button>
         </form>
     );
