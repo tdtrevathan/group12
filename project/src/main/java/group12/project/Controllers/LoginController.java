@@ -22,14 +22,24 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/signin")
-    public ResponseEntity<Map<String, Boolean>> userLogin(@RequestBody loginView entity) throws Exception {
-       
-        var validate = loginService.validateLogin(entity);
-        
+    public ResponseEntity<Map<String, Boolean>> userLogin(@RequestBody Map<String, String> json) throws Exception {
+
         Map<String, Boolean> body = new HashMap<>();
-        body.put("username", validate);
+        
+        try {
+
+            loginView login = new loginView(json.get("username"), json.get("password"));
+            var validate = loginService.validateLogin(login);
+            body.put("credentials", validate);
+        
+        }
+        catch(Exception error) {
+            System.out.println(error.getMessage());
+            body.put("credentials", false);
+        }
 
         return new ResponseEntity<>(body, HttpStatus.OK);
+
     }
 
     @PostMapping("/signup")
