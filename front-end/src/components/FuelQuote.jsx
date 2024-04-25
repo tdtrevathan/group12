@@ -201,8 +201,7 @@ export default function FuelQuote ( {loggedInUsername, loggedInAddress} ) {
                 value={loggedInAddress}
                 className='readonly'
                 readOnly
-            >
-            </Input>
+            ></Input>
 
             <Input name='date' label='Delivery Date: *' type='date' className={errorClass.date} handleChange={handleChange}></Input>
             {errors.date && <span className='error'>{errors.date}</span>}
