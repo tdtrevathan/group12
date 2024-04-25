@@ -9,6 +9,9 @@ import group12.project.PricingModule;
 import group12.project.Repos.fuelQuoteRepo;
 import group12.project.Views.fuelQuoteView;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 @Service
 public class FuelQuoteService {
 
@@ -18,6 +21,13 @@ public class FuelQuoteService {
     public List<fuelQuoteView> getHistory(String username) throws Exception {
 
         List<fuelQuoteView> quoteHistory = repo.findByUsername(username);    
+
+        Collections.sort(quoteHistory, new Comparator<fuelQuoteView>() {
+            @Override
+            public int compare(fuelQuoteView f1, fuelQuoteView f2) {
+                return f1.getDate().compareTo(f2.getDate());
+            }
+        });
 
         return quoteHistory;
     }
