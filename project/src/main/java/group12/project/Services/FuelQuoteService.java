@@ -25,7 +25,7 @@ public class FuelQuoteService {
         Collections.sort(quoteHistory, new Comparator<fuelQuoteView>() {
             @Override
             public int compare(fuelQuoteView f1, fuelQuoteView f2) {
-                return f1.getDate().compareTo(f2.getDate());
+                return f2.getDate().compareTo(f1.getDate());
             }
         });
 
