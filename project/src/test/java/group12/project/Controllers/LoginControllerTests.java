@@ -30,18 +30,78 @@ class LoginControllerTests {
     @Test
     public void userLogin_Success() throws Exception {
 
-        loginView login = new loginView(
+        loginView loginview = new loginView(
             "Admin",
             "P@ssw0rd"
         );
 
-        Mockito.when(service.validateLogin(login))
+        Map<String, String> login = new HashMap<>();
+        login.put("username", loginview.getUsername());
+        login.put("password", loginview.getPassword());
+
+        Mockito.when(service.validateLogin(loginview))
             .thenReturn(true);
 
         var result = controller.userLogin(login);
 
         Map<String, Boolean> body = new HashMap<>();
-        body.put("username", true);
+        body.put("credentials", true);
+
+        assertEquals(body, result.getBody());
+
+    }
+
+    @Test
+    public void userLogin_BadUsername() throws Exception {
+
+        Map<String, String> login = new HashMap<>();
+        login.put("username", "");
+        login.put("password", "P@ssw0rd");
+
+        var result = controller.userLogin(login);
+
+        Map<String, Boolean> body = new HashMap<>();
+        body.put("credentials", false);
+
+        assertEquals(body, result.getBody());
+
+    }
+
+    @Test
+    public void userLogin_BadPassword() throws Exception {
+
+        Map<String, String> login = new HashMap<>();
+        login.put("username", "Admin");
+        login.put("password", "Fail");
+
+        var result = controller.userLogin(login);
+
+        Map<String, Boolean> body = new HashMap<>();
+        body.put("credentials", false);
+
+        assertEquals(body, result.getBody());
+
+    }
+
+    @Test
+    public void userLogin_ValidationFails() throws Exception {
+
+        loginView loginview = new loginView(
+            "Admin",
+            "P@ssw0rd"
+        );
+
+        Map<String, String> login = new HashMap<>();
+        login.put("username", loginview.getUsername());
+        login.put("password", loginview.getPassword());
+
+        Mockito.when(service.validateLogin(loginview))
+            .thenReturn(false);
+
+        var result = controller.userLogin(login);
+
+        Map<String, Boolean> body = new HashMap<>();
+        body.put("credentials", false);
 
         assertEquals(body, result.getBody());
 

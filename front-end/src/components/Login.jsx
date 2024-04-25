@@ -45,7 +45,7 @@ export default function Login( {setLoggedInUsername} ) {
 
             console.log(responseBody)
 
-            if(formData.username == '' || formData.password == '' || !responseBody.username) {
+            if(formData.username == '' || formData.password == '' || !responseBody.credentials) {
                 throw new Error('Invalid username or password');
             }
 
