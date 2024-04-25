@@ -7,7 +7,7 @@ export function Table ({headers, rows}){
         <table>
             <thead>
                 <tr>
-                    { headers.map((item)=><th>{item}</th>) }
+                    { headers.map((item,i)=><th key={i}>{item}</th>) }
                 </tr>
             </thead>
             <tbody>
